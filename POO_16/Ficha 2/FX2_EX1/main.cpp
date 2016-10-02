@@ -45,7 +45,7 @@ int main(void)
     
     cout << "\nn.a[0] : " <<getA(tab, 0) << endl;
     
-    cout << elementoEm(tab,0) << endl;
+    cout << elementoEm(tab,100) << endl;
     elementoEm(tab,100) = 15;
     
     cout << elementoEm(tab, 100) <<endl;
