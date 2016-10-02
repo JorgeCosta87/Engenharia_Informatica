@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
