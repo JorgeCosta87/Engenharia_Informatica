@@ -14,9 +14,8 @@
 #include "Tabela.h"
 
 #include <cstdlib>
-#include <iostream>
 #include <string>
-#include <cstring>
+#include <sstream>
 #include "Tabela.h"
 
 using namespace std;
@@ -31,12 +30,13 @@ void Tabela::inicializa(int num){
     for (int i = 0 ; i < DIM; i++) a[i] =  num;
 }
 
-void Tabela::listar(){
+/*void Tabela::listar(){
     cout << "\nListar Estrutura: ";
     for(int i = 0; i < n; i++)
         cout <<"\n a[" << i << "]" << a[i];
     cout << endl;
 }
+*/
 
 int Tabela::getA(int indice){
     if(indice < 0 || indice >= n) return 0;
@@ -55,5 +55,19 @@ int & Tabela::elementoEm(int indice){
     if(indice < 0 || indice >= n) return lixo;
     return a[indice];
     
+}
+
+string Tabela::getAsString(){
+    ostringstream oss;
+   
+    oss << "\nListar Estrutura: ";
+    for(int i = 0; i < n; i++){
+        if(i%5 == 0){
+            oss << endl;
+        }
+        oss <<" a[" << i << "]" << a[i] << "  ";
+    }
+    oss << endl;
+    return oss.str(); // converte para string
 }
 
