@@ -11,7 +11,6 @@
  * Created on 4 de Outubro de 2016, 23:04
  */
 
-#include "Caderno.h"
 
 
 #include <cstdlib>
@@ -22,7 +21,7 @@
 using namespace std;
  
  
-Caderno::Caderno(const string & marca, string cor, int n_folhas, float tamanho){
+Caderno::Caderno(const string & marca, const string cor, int n_folhas, const string tamanho){
     this->marca = marca;
     this->cor  = cor;
     this->n_folhas = n_folhas;
@@ -41,7 +40,7 @@ Caderno::Caderno(const string & marca, string cor, int n_folhas, float tamanho){
      return this->n_folhas;
  }
  
- float Caderno::ObterTamanho(){
+ string Caderno::ObterTamanho(){
      return this->tamanho;
  }
  
@@ -57,7 +56,7 @@ Caderno::Caderno(const string & marca, string cor, int n_folhas, float tamanho){
      this->n_folhas = n_folhas;
  }
  
- void Caderno::SetTamanho(float tamanho){
+ void Caderno::SetTamanho(string tamanho){
      this->tamanho = tamanho;
  }
  
