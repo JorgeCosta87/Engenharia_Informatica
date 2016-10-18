@@ -18,7 +18,7 @@ void TeleVector::setCanais(string canais0[], int n){
 		n = 0;
         canais.clear();
 	for( unsigned int i = 0 ; i < n ; i++){
-		canais.push_back(canais0[i]);
+		canais.push_back(canais0[i]); // coloca os canais no fim do array
 	}
         
 }
@@ -40,15 +40,15 @@ string TeleVector::getAsString()const{
         for ( unsigned int i = 0; i < canais.size(); i++)
             oss << canais[i] << "  ";
         
-        for( const string & c: canais){
+        for( const string & c: canais){ // string & é mesmo o valor e nao a copia, para ser eficiente, como tem um const nao pode ser alterado
             oss << c << "  ";
         }
-        for( const auto & c: canais){
+        for( const auto & c: canais){ // auto é um tipo deduzido compliador sabe que o vector strings, logo sabes que é uma string
             oss << c << "  ";
         }
-        for( vector<string>::const_iterator it = canais.begin();
+        for( vector<string>::const_iterator it = canais.begin(); // o iterator (uma ponteiro que aponta para a coleção) corre uma coleção, objecto que pertmi correr uma coleção. como estamos numa função const temos de usar const
                  it != canais.end(); it++){
-            oss << *it << "  ";
+            oss << *it << "  "; // o * aponta para o dado do endereço do ponteiro.
         }
 
         for( auto it = canais.begin(); it != canais.end(); it++){
