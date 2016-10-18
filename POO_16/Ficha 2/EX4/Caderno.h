@@ -22,18 +22,18 @@ class Caderno{
     string marca;
     string cor;
     int n_folhas;
-    float tamanho;
+    string tamanho;
      
  public:
-     Caderno(const string , string , int, float);
+    Caderno(const string & marca, const string cor, int n_folhas, const string tamanho);
     string ObterMarca() const;
     string ObterCor();
     int ObterNFolhas();
-    float ObterTamanho();
+    string ObterTamanho();
     void SetMarca(string marca);
     void SetCor(string cor);
     void SetNFolhas(int n_folhas);
-    void SetTamanho(float tamanho);
+    void SetTamanho(string tamanho);
 
  };
 
