@@ -1,5 +1,5 @@
 
-globals [xstart ystart xend yend init_heading food perceptions]
+globals [xstart ystart xend yend init_heading food perceptions caminho]
 
 
 
@@ -268,7 +268,7 @@ Prob
 Prob
 0
 100
-31
+20
 1
 1
 NIL
