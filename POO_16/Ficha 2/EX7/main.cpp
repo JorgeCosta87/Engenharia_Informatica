@@ -21,7 +21,7 @@ void teste_g(){
 }
 
 void teste_h(MSG z){
-//	MSG aux('y');
+	MSG aux('y');
 }
 void teste_l(MSG & z){
 //	MSG aux('y');
@@ -44,34 +44,41 @@ MSG & teste_n(MSG & aux, MSG & aux2){
 }
 
 int main(){
-	MSG a('a');
+	//MSG a('a');
 	MSG b;
 //	MSG & c=b;
-	MSG d = b;  // equivalente a MSG d(b);
-	a = b;
+	//MSG d = b;  // equivalente a MSG d(b);
+	//a = b;
 //	MSG mat[] = { 'M', 'N'};
 //        MSG mat[2];
 //	MSG mat[] = { a, b};
 //	MSG mat[4] = { MSG('M'), MSG('N')};
 	//MSG mat[] = { MSG(), MSG()};
 	//MSG mat[2];
+        
+//alinha G
 //	cout << "\n chamada de teste_g\n";
 //	teste_g();
 //	cout << "\n fim de teste_g\n";
 //	cout << "\n chamada de teste_g\n";
 //	teste_g();
 //	cout << "\n fim de teste_g\n";
-//	cout << "\n*****vai chamar teste_h\n";
+
+
+//alinha H
+//        cout << "\n*****vai chamar teste_h\n";
 //	teste_h(b);  // chama ccop
 //        teste_h(MSG('g')); // nao chama ccop
 //	cout << "\n*****retornou de teste_h\n";
 //	cout << "\n*****vai chamar teste_h\n";
 //	teste_h(b);
 //	cout << "\n*****retornou de teste_h\n";
+        
 //	cout << "\n passagem por referencia\n";
 //	teste_l(b);
 //	cout << "\n FIM\n";
 ////
+//alinha M
 //	cout << "\nAntes de chamar teste_m() \n";
 //	a = teste_m();
 //	cout << "\nDepois de chamar teste_m() \n";

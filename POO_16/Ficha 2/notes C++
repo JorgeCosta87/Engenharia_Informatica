@@ -1,0 +1,9 @@
+///Vector
+
+#include <vector>
+vector <string> canais = {"um","dois"};
+
+canais.size;
+canais.push_back("umm"); insere um canal no fim
+canais[i]
+canais.erase(canais.begin( + i);

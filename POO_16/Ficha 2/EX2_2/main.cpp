@@ -29,10 +29,11 @@ int main(void)
     
     tab.inicializa(4);
     
-    tab.listar();
+    cout << tab.getAsString();
     
     tab.setA(0, 999);
-    tab.listar();
+    
+    cout << tab.getAsString();
     
     cout << "\nn.a[0] : " <<tab.getA( 0) << endl;
     

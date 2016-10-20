@@ -14,6 +14,10 @@
 #ifndef TABELA_H
 #define TABELA_H
 
+#include <string>
+
+using namespace std;
+
 class Tabela{
      static const int DIM = 20;
      int a[DIM];
@@ -26,6 +30,7 @@ class Tabela{
     int getA(int indice); 
     void setA(int indice, int valor);
     int & elementoEm(int indice);
+    string getAsString();
      
  };
 

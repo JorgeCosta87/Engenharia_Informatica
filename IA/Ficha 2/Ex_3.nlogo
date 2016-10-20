@@ -1,5 +1,6 @@
 breed[formigas formiga]
 breed[caracois caracol]
+globals[rand]
 
 to Setup
   Setup-patches
@@ -11,6 +12,7 @@ to Setup-patches
     clear-all
     set-patch-size 15
     ask patches [ifelse random 100 < 5 [set pcolor red][set pcolor black]]
+
     ask one-of patches with [pcolor = black]
     [
      set pcolor  blue
@@ -23,7 +25,7 @@ end
 
 to Go
   MoveFormigas
- ; MoveCaracois
+  MoveCaracois
   if count turtles = 0
   [
    stop
@@ -35,42 +37,57 @@ to MoveFormigas
 
   ask formigas
   [
-     ifelse patch-ahead   with [pcolor = red]
+     ifelse [pcolor] of patch-ahead 1 = red
      [
-        right 90
-         ifelse patch-ahead   with [pcolor = blue]
+       rt 90
+     ]
+     [
+       ifelse [pcolor] of patch-ahead 1 = blue
          [
            forward 1
            die
          ]
-     ]
-     [
-        set rand = 0
-        rand = random 100
-
-        ifelse rand < 10
-        [
-          ifelse rand < 5
-          [
-            rt 90
-          ]
-          [
-           lt 90
-          ]
-        ]
-        [
-          forward 1
-        ]
-
-
-        [set pcolor black] right 90
+         [
+           ifelse random 100 < 10
+           [
+             ifelse random 100 < 5
+             [
+               rt 90
+             ]
+             [
+               lt 90
+             ]
+           ]
+           [
+             forward 1
+           ]
+         ]
      ]
   ]
 
 end
 
 
+to MoveCaracois
 
+  ask caracois
+  [
+     ifelse [pcolor] of patch-here = red
+     [
+       die
+     ]
+     [
+       ifelse [pcolor] of patch-here = yellow
+         [
+           die
+         ]
+         [
+           forward 1
+         ]
+     ]
+  ]
+
+end
 
 
 to Setup-turtles
@@ -180,7 +197,7 @@ nformigas
 nformigas
 0
 100
-33
+6
 1
 1
 NIL
@@ -195,11 +212,22 @@ ncaracois
 ncaracois
 0
 100
-62
+40
 1
 1
 NIL
 HORIZONTAL
+
+MONITOR
+30
+280
+181
+325
+NIL
+count formigas
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
