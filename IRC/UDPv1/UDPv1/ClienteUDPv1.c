@@ -3,7 +3,7 @@ Este cliente destina-se a enviar mensagens passadas na linha de comando, sob
 a forma de um argumento, para um servidor especifico cuja locacao e' dada
 pelas seguintes constantes: SERV_HOST_ADDR (endereco IP) e SERV_UDP_PORT (porto)
 
-O protocolo usado e' o UDP.
+O protocolo usado e' o UDP. git
 ==============================================================================*/
 #define _CRT_SECURE_NO_WARNINGS
 
