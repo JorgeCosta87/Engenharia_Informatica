@@ -7,7 +7,7 @@ using namespace std;
 #include "Ponto.h"
 
 class Rectangulo {
-	Ponto canto;
+	Ponto canto; //composição, visto que a classe Rectagunlo contem um objecto da clase Ponto
 	int largura;
 	int altura;
 

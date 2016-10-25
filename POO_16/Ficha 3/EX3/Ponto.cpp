@@ -15,6 +15,7 @@
 #include <iostream>
 #include <sstream>
 #include <cmath>
+#include <string>
 
 Ponto::Ponto(int x0, int y0):x(x0) {
     x  = x0;

@@ -28,12 +28,6 @@ public:
     
     
     
-//    int getX() const;
-//    int getY() const;
-//    
-//    void setX(int x0);
-//    void setY(int y0);
-    
     string getAsString() const;
     
     
