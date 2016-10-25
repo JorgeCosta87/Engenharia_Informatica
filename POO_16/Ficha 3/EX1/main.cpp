@@ -5,8 +5,8 @@
 using namespace std;
 
 #include "Ponto.h"
-#include "Triangulo.h"
-#include "Rectangulo.h"
+//#include "Triangulo.h"
+//#include "Rectangulo.h"
 
 
 // EXERCICIO 1

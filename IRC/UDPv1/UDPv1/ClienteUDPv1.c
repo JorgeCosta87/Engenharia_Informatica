@@ -27,11 +27,11 @@ int main(int argc, char *argv[])
 {
 
 	char ip[18];
-	int port, msg;
+	int port, msg, broadcast = 1;
 
 	SOCKET sockfd;
-	int msg_len, iResult, nbytes, info_len;
-	struct sockaddr_in serv_addr, info_sock;
+	int msg_len, iResult, nbytes, info_len, info_serv_len;
+	struct sockaddr_in serv_addr, info_sock, info_serv;
 	char buffer[BUFFERSIZE];
 	WSADATA wsaData;
 
@@ -85,12 +85,20 @@ int main(int argc, char *argv[])
 	serv_addr.sin_addr.s_addr = inet_addr(ip); /*IP no formato "dotted decimal" => 32 bits*/
 	serv_addr.sin_port = htons(port); /*Host TO Netowork Short*/
 
+
+	if ((setsockopt(sockfd, SOL_SOCKET, SO_BROADCAST, (char *)&broadcast, sizeof(broadcast))) == SOCKET_ERROR) {
+		perror("Setsockopt - SOL_SOCKET");
+		getc(stdin);
+		exit(1);
+	}
 									  /*====================== ENVIA MENSAGEM AO SERVIDOR ==================*/
 
-	msg_len = sizeof(argv[msg]);
+	msg_len = strlen(argv[msg]);
 
-	if (sendto(sockfd, argv[msg], msg_len, 0, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == SOCKET_ERROR)
-		Abort("SO nao conseguiu aceitar o datagram");
+	while (1) {
+		if (sendto(sockfd, argv[msg], msg_len, 0, (struct sockaddr*)&serv_addr, sizeof(serv_addr)) == SOCKET_ERROR)
+			Abort("SO nao conseguiu aceitar o datagram");
+	}
 
 	printf("<CLI1>Mensagem enviada ...\n");
 
@@ -99,10 +107,15 @@ int main(int argc, char *argv[])
 
 	printf("Porto local: %d", ntohs(info_sock.sin_port));
 
-	nbytes = recvfrom(sockfd, buffer, sizeof(buffer), 0, NULL, NULL);
+	info_serv_len = sizeof(info_serv);
+	nbytes = recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&info_serv, &info_serv_len);
 
 	if (nbytes == SOCKET_ERROR)
 		Abort("Erro na recepcao de datagrams");
+
+	if (!((info_serv.sin_addr.s_addr) == (serv_addr.sin_addr.s_addr) && (info_serv.sin_port == serv_addr.sin_port))) {
+		printf("\nImpostor ip: %s  %s - PORT: %d %d\n", inet_ntoa(info_serv.sin_addr), inet_ntoa(serv_addr.sin_addr) ,ntohs(info_serv.sin_port), ntohs(serv_addr.sin_port));
+	}
 
 	buffer[nbytes] = '\0'; /*Termina a cadeia de caracteres recebidos com '\0'*/
 

@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UDPv1", "UDPv1\UDPv1.vcxproj", "{A81D47F8-2F17-40D9-B383-A120ED581E04}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ClienteUDP", "UDPv1\UDPv1.vcxproj", "{A81D47F8-2F17-40D9-B383-A120ED581E04}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServidorUDPv1", "ServidorUDPv1\ServidorUDPv1.vcxproj", "{EA027DC2-8AD6-438A-BD9D-D7F14C791119}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ServidorUDP", "ServidorUDPv1\ServidorUDPv1.vcxproj", "{EA027DC2-8AD6-438A-BD9D-D7F14C791119}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
