@@ -1,27 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Rectangulo.h
- * Author: costa
- *
- * Created on 19 de Outubro de 2016, 23:37
- */
-
 #ifndef RECTANGULO_H
 #define RECTANGULO_H
 
-class Rectangulo {
-public:
-    Rectangulo();
-    Rectangulo(const Rectangulo& orig);
-    virtual ~Rectangulo();
-private:
+#include <string>
+using namespace std;
 
+#include "Ponto.h"
+
+class Rectangulo {
+	Ponto canto;
+	int largura;
+	int altura;
+
+public:
+	Rectangulo(int x, int y, int larg, int alt);
+
+	~Rectangulo();
+
+	Ponto getCanto()const;
+	int getLargura()const;
+	int getAltura()const;
+	string getAsString()const;
+	int calculaArea()const;
+
+	void setCanto( const Ponto & c);
+	bool setLargura( int larg);
+	bool setAltura( int alt);
 };
 
-#endif /* RECTANGULO_H */
-
+#endif
