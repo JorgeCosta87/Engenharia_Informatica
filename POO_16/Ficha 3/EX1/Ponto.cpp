@@ -1,61 +1,51 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Ponto.cpp
- * Author: costa
- * 
- * Created on 19 de Outubro de 2016, 22:37
- */
-
-#include "Ponto.h"
 #include <iostream>
 #include <sstream>
 #include <cmath>
 
-Ponto::Ponto(int x0, int y0):x(x0) {
-    x  = x0;
+using namespace std;
+
+#include "Ponto.h"
+
+
+
+Ponto::Ponto(int x0, int y0):x(x0), y(y0){
+//	x = x0;
+//	y = y0;
+	cout << "\nPonto(int x0, int y0)  " << getAsString();
+}
+//Ponto::Ponto( const Ponto & z){
+//		x = z.x;
+//		y = z.y;
+//		std::cout << "\nPonto(const Ponto & z)  " << getAsString();
+//}
+Ponto::~Ponto(){
+	cout << "\n~Ponto()  " << getAsString();
 }
 
-Ponto::Ponto(const Ponto& orig) {
+int Ponto::getX()const{
+	return x;
+}
+int Ponto::getY()const{
+	return y;
 }
 
-Ponto::~Ponto() {
-    cout << "\n~Ponto()  " << endl;  
+void Ponto::setX(int x0){
+	x = x0;
+}
+void Ponto::setY(int y0){
+	y = y0;
 }
 
-
-
+// obter um objecto string com a descricao textual do seu conteudo (formato  (x  / y) ).
 string Ponto::getAsString()const{
 	ostringstream oss;
-	oss<< " ( " << x << " , " << y << " ) ";
+	oss << " ( " << x << "," << y << ") ";
 	return oss.str();
 }
 
-double Ponto::calculaDistancia(const Ponto & outro) const {
-    // x, y coordenadas do ponto que invoca (apontado por this)
-    //outro.x, outro.y coordenadas do ponto recebido como parametro)
-    
-    double d2 = (x - outro.x) * (x - outro.x) + (y - outro.y) * (y - outro.y);
-    return sqrt(d2);
+double Ponto::calculaDistancia(const Ponto & outro)const{
+	//  x, y, coordenadas do ponto que invoca (apontado por this)
+	// outro.x, outro.y coordenadas do ponto recebido como parametro 
+	double d2 = (x - outro.x)*(x - outro.x) + (y - outro.y)*(y - outro.y);
+	return sqrt(d2);
 }
-
-void Ponto::setY(int y) {
-    this->y = y;
-}
-
-int Ponto::getY() const {
-    return y;
-}
-
-void Ponto::setX(int x) {
-    this->x = x;
-}
-
-int Ponto::getX() const {
-    return x;
-}
-
