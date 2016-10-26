@@ -4,8 +4,8 @@
 
 using namespace std;
 
-#include "Tirangulo.h"
-//#include "Triangulo.h"
+
+#include "Triangulo.h"
 //#include "Rectangulo.h"
 
 
