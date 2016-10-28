@@ -5,12 +5,15 @@
 
 void diz(int s){
 	if (s == SIGINT){
-
 		printf("Hey\n");
+		alarm(0);
 
 	} else if(s==SIGUSR1) {
 		printf("\nAdeus..\n");
 		exit(3);
+	} else if (s == SIGALRM){
+		alarm(10);
+		write(1, "X", 1);
 	}
 }
 
@@ -19,6 +22,12 @@ int main(int argc, char** argv){
 	//signal(SIGINT, SIG_IGN);
 	signal(SIGUSR1, diz);
 	signal(SIGINT, diz);
+
+
+	signal(SIGALRM, diz);
+
+	alarm(10);
+
 	printf("Processo %d ... \n", getpid());
 	if(argc != 3){
 		printf("[ERRO] Nr . ARGS %d != 3\n", argc);
