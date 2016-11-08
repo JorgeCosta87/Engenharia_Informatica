@@ -19,9 +19,9 @@ class MSG {
 //	MSG(const MSG & ob);
 public:
 	MSG(char c = 'X');
-//        MSG(char c);
+     //   MSG(char c);
 	MSG(const MSG & ob);
-//        MSG(const MSG && ob);
+       //MSG(const MSG && ob);
 	~MSG();
 	string getAsString()const;
 	void setNum(int n);
