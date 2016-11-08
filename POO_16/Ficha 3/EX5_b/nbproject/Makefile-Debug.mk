@@ -37,7 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/Aviso.o \
 	${OBJECTDIR}/Prego.o \
-	${OBJECTDIR}/main_1.o
+	${OBJECTDIR}/main.o
 
 
 # C Compiler Flags
@@ -74,10 +74,10 @@ ${OBJECTDIR}/Prego.o: Prego.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Prego.o Prego.cpp
 
-${OBJECTDIR}/main_1.o: main_1.cpp 
+${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main_1.o main_1.cpp
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:

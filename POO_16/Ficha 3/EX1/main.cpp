@@ -30,7 +30,7 @@ int main(){
 ////
 //
 ////	Ponto tab_d[] = { Ponto( 1, 3), Ponto( 2, 4), Ponto( 5, 7) };
-//    Ponto tab_d[] = { { 1, 3}, { 2, 4}, { 5, 7} };
+   Ponto tab_d[] = { { 1, 3}, { 2, 4}, { 5, 7} };
 ////	cout << "\nC: " << tab_d[2].getAsString() << endl; 
 //
 //	Ponto tab_e[3];

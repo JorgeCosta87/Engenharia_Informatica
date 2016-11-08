@@ -39,8 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/_ext/f5301fce/Ponto.o \
 	${OBJECTDIR}/_ext/f5301fce/Principal.o \
 	${OBJECTDIR}/_ext/f5301fce/Rectangulo.o \
-	${OBJECTDIR}/Desenho.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/Desenho.o
 
 
 # C Compiler Flags
@@ -91,11 +90,6 @@ ${OBJECTDIR}/Desenho.o: Desenho.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Desenho.o Desenho.cpp
-
-${OBJECTDIR}/main.o: main.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 # Subprojects
 .build-subprojects:

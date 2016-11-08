@@ -40,7 +40,7 @@ int Tabela::getA(int indice){
 
 void Tabela::setA(int indice, int valor) {
     if(indice < 0 || indice >= n) return;
-    a[indice] = valor;
+   this->a[indice] = valor;
 }
 
 int & Tabela::elementoEm(int indice){

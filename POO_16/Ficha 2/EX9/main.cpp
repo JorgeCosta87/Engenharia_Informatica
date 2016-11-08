@@ -26,6 +26,7 @@ int lerInt(string msg);
  * 
  */
 int main(int argc, char** argv) {
+    
    string opcoes[] = {"Sair",
         "Ler dados de uma televisao",
         "Listar dados de uma televisao",

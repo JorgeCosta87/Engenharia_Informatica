@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-#include "Ponto.h"
+class Ponto;
 
 class Rectangulo {
 	Ponto canto; //composição, visto que a classe Rectagunlo contem um objecto da clase Ponto

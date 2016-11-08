@@ -12,12 +12,14 @@
  */
 
 #include "Triangulo.h"
+#include "Ponto.h"
 #include <string>
 #include <iostream>
 #include <sstream>
+
 using namespace std;
 
-Triangulo::Triangulo(int x1, int y1, int x2, int y2, int x3, int y3):vertices ( Ponto( 1, 3), Ponto( 2, 4), Ponto( 5, 7) ) {
+Triangulo::Triangulo(int x1, int y1, int x2, int y2, int x3, int y3):vertices{ Ponto(x1,x2), Ponto(x2,y2), Ponto(x3,y3) }  {
     cout << getAsString();
 }
 

@@ -112,4 +112,3 @@ Desenho::Desenho(const Desenho& orig) {
 
 Desenho::~Desenho() {
 }
-
