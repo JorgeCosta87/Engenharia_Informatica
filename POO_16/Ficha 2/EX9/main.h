@@ -1,9 +1,4 @@
-/* 
- * File:   main.h
- * Author: Admin2
- *
- * Created on 11 de Outubro de 2016, 10:45
- */
+
 
 #ifndef MAIN_H
 #define	MAIN_H
