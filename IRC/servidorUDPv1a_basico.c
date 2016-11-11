@@ -20,10 +20,9 @@ int main( int argc , char *argv[] )
 {
 	SOCKET sockfd;
 	int iResult, nbytes;
-	struct sockaddr_in serv_addr, cli_addr;
+	struct sockaddr_in serv_addr;
 	char buffer[BUFFERSIZE];
 	WSADATA wsaData;
-	unsigned int cli_len;
 
 	/*=============== INICIA OS WINSOCKS ==============*/
 
@@ -56,12 +55,12 @@ int main( int argc , char *argv[] )
 
 
 	/*================ PASSA A ATENDER CLIENTES INTERACTIVAMENTE =============*/
-	cli_len = sizeof(cli_addr);
+
 	while(1){
 
 		fprintf(stderr,"<SER1>Esperando datagram...\n");
 
-		nbytes = recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *)&cli_addr, &cli_len);
+		nbytes=recvfrom(sockfd , buffer , sizeof(buffer) , 0 , NULL , NULL);
 
 		if(nbytes == SOCKET_ERROR) 
 			Abort("Erro na recepcao de datagrams");
@@ -69,15 +68,7 @@ int main( int argc , char *argv[] )
 		buffer[nbytes]='\0'; /*Termina a cadeia de caracteres recebidos com '\0'*/
 
 		printf("\n<SER1>Mensagem recebida {%s}\n",buffer);
-		printf("\n<SER1>Client ip: {%s}\n", inet_ntoa(cli_addr.sin_addr));
-		printf("\n<SER1>Client port: {%d}\n", ntohs(cli_addr.sin_port));
 		
-		
-
-		if (sendto(sockfd, buffer, strlen(buffer), 0, (struct sockaddr*)&cli_addr, sizeof(cli_addr)) == SOCKET_ERROR)
-			Abort("SO nao conseguiu aceitar o datagram");
-
-		printf("<SERV1>Confirmacao enviada ...\n");
 	}
 	
 }

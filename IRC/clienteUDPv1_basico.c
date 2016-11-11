@@ -5,14 +5,10 @@ pelas seguintes constantes: SERV_HOST_ADDR (endereco IP) e SERV_UDP_PORT (porto)
 
 O protocolo usado e' o UDP.
 ==============================================================================*/
-#define _CRT_SECURE_NO_WARNINGS
 
 #include <winsock.h>
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
  
-
 #define SERV_HOST_ADDR "127.0.0.1"
 #define SERV_UDP_PORT  6000
 
@@ -25,42 +21,18 @@ void Abort(char *msg);
 
 int main( int argc , char *argv[] )
 {
-	
-	char ip[18];
-	int port, msg;
 
 	SOCKET sockfd;
-	int msg_len, iResult, nbytes, info_len;
-	struct sockaddr_in serv_addr, info_sock;
+	int msg_len, iResult;
+	struct sockaddr_in serv_addr;
 	char buffer[BUFFERSIZE];
 	WSADATA wsaData;
 
-
-
-
-
 	/*========================= TESTA A SINTAXE =========================*/
 
-	if(argc != 7){
-		fprintf(stderr,"Sintaxe: %s -msg -ip -port\n",argv[0]);
+	if(argc != 2){
+		fprintf(stderr,"Sintaxe: %s frase_a_enviar\n",argv[0]);
 		exit(EXIT_FAILURE);
-	}
-
-
-	for (int i = 1; i < argc; i++) {
-
-		if (strcmp(argv[i], "-ip") == 0)
-		{
-			strcpy(ip, argv[i + 1]);
-		}
-		else if (strcmp(argv[i], "-msg") == 0)
-		{
-			msg = i + 1;
-		}
-		else if (strcmp(argv[i], "-port") == 0)
-		{
-			port = atoi(argv[i + 1]);
-		}
 	}
 
 	/*=============== INICIA OS WINSOCKS ==============*/
@@ -82,31 +54,17 @@ int main( int argc , char *argv[] )
 
 	memset( (char*)&serv_addr , 0, sizeof(serv_addr) ); /*Coloca a zero todos os bytes*/
 	serv_addr.sin_family = AF_INET; /*Address Family: Internet*/
-	serv_addr.sin_addr.s_addr = inet_addr(ip); /*IP no formato "dotted decimal" => 32 bits*/
-	serv_addr.sin_port = htons(port); /*Host TO Netowork Short*/
+	serv_addr.sin_addr.s_addr = inet_addr(SERV_HOST_ADDR); /*IP no formato "dotted decimal" => 32 bits*/
+	serv_addr.sin_port = htons(SERV_UDP_PORT); /*Host TO Netowork Short*/
 
 	/*====================== ENVIA MENSAGEM AO SERVIDOR ==================*/
 
-	msg_len = sizeof(argv[msg]);
+	msg_len = strlen(argv[1]);
 
-	if(sendto( sockfd , argv[msg] , msg_len , 0 , (struct sockaddr*)&serv_addr , sizeof(serv_addr) ) == SOCKET_ERROR)
+	if(sendto( sockfd , argv[1] , msg_len , 0 , (struct sockaddr*)&serv_addr , sizeof(serv_addr) ) == SOCKET_ERROR)
 		Abort("SO nao conseguiu aceitar o datagram");
 
-	printf("<CLI1>Mensagem enviada ...\n");
-
-	info_len = sizeof(info_sock);
-	getsockname(sockfd, (struct sockaddr*)&info_sock, &info_len);
-
-	printf("Porto local: %d", ntohs(info_sock.sin_port));
-
-	nbytes = recvfrom(sockfd, buffer, sizeof(buffer), 0, NULL, NULL);
-
-	if (nbytes == SOCKET_ERROR)
-		Abort("Erro na recepcao de datagrams");
-
-	buffer[nbytes] = '\0'; /*Termina a cadeia de caracteres recebidos com '\0'*/
-
-	printf("\n<CLi1>Mensagem recebida {%s}\n", buffer);
+	printf("<CLI1>Mensagem enviada ... a entrega nao e' confirmada.\n"); 
 
 	/*========================= FECHA O SOCKET ===========================*/
 
