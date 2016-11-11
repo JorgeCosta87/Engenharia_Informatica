@@ -12,6 +12,7 @@
  */
 
 #include "Ponto.h"
+
 #include <iostream>
 #include <sstream>
 #include <cmath>

@@ -54,14 +54,14 @@ using namespace std;
 // EXERCICIO 3
 int main(){
 	Rectangulo a(1, 2 , 4, 2);
-////	cout << "\n\n1: " << a.getAsString() << endl;
+	cout << "\n\n1: " << a.getAsString() << endl;
 //	Rectangulo b(1, 2 , 44, 22);
 //	cout << "\n\n2: " <<  b.getAsString() << endl;  // a)
-//
+
 	Ponto p2(4,5);
 	a.setCanto(p2);
-//
-//	cout << "\n\nA: "<< a.getAsString() << endl;
+
+	cout << "\n\nA: "<< a.getAsString() << endl;
 //	cout << "\n\nB: " << b.getAsString() << endl;
 //
 //	//cout << a.getCanto().getAsString() << endl;
