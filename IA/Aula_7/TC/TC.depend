@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1478814291 source:/home/costa/Repos/Engenharia_Informatica/IA/Aula_7/TC/algoritmo.c
+	<stdio.h>
+	<stdlib.h>
+	"algoritmo.h"
+	"funcao.h"
+	"utils.h"
+
+1478082416 /home/costa/Repos/Engenharia_Informatica/IA/Aula_7/TC/algoritmo.h
+
+1478082404 /home/costa/Repos/Engenharia_Informatica/IA/Aula_7/TC/funcao.h
+
+1478082616 /home/costa/Repos/Engenharia_Informatica/IA/Aula_7/TC/utils.h
+
+1478647896 source:/home/costa/Repos/Engenharia_Informatica/IA/Aula_7/TC/funcao.c
+	"funcao.h"
+
+1478082572 source:/home/costa/Repos/Engenharia_Informatica/IA/Aula_7/TC/utils.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"utils.h"
+
+1478814430 source:/home/costa/Repos/Engenharia_Informatica/IA/Aula_7/TC/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"algoritmo.h"
+	"utils.h"
+
