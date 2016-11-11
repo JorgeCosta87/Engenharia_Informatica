@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -9,7 +7,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-int main(int argc, char** argv){
+	int main(int argc, char** argv){
 
 
 	int i, fd;
@@ -18,13 +16,20 @@ int main(int argc, char** argv){
 	mkfifo("canal.txt", 0600);
 
 	fd = open("canal.txt",O_RDONLY);
-	printf("\nJá tneho clientes\n");
-	while( ( i = read(fd, str, 79) ) > 0){  //temos de usar ( ), caso contrario a comparação seria feita primeiro que a atribuição
+
+	do{
+
+	 i = read(fd, str, 79);  //temos de usar ( ), caso contrario a comparação seria feita primeiro que a atribuição
+	if(i>0){
 		str[i] = '\0';
-		printf("%s", str);
+		printf("%s (%d btes)", str,i);
+	}else if(i==0){
+	printf("Nao tenho produtores..");
+		sleep(1);
 	}
-	printf("\nPerdi todos os clientes\n");
+	}while(strncmp(str,"desliga",7) != 0);
 	close(fd);
+	printf("Vou terminar");
 
 	unlink("canal.txt");
 
