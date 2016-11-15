@@ -39,3 +39,77 @@ string Fraccao::getAsString()const{
 	oss << "(" << num << " / " << denom << ")" ;
 	return oss.str();
 }
+Fraccao & Fraccao::operator*=( const Fraccao & ob){
+		num = num * ob.num;
+		denom = denom * ob.denom;
+//		*this = Fraccao(num * ob.num, denom * ob.denom);
+                simplifica();
+		return *this;
+}
+
+Fraccao & Fraccao::operator++(){
+		num += denom; // a fraccao aumenta uma unidade
+		simplifica();
+		return *this; // retorna o objecto depois de incrementado
+}
+Fraccao Fraccao::operator++(int n){
+		Fraccao aux = *this; // grava para esta variavel auxiliar o objecto antes de incrementar
+		num += denom; // a fraccao aumenta uma unidade
+		simplifica();
+		return aux;// nao pode ser por refer�ncia, retorna-se uma variavel local
+}
+
+
+
+
+//definicao do operador binario + como funcao global
+Fraccao operator+(const Fraccao & a, const Fraccao & b){
+	Fraccao soma( a.getNum() * b.getDenom() + b.getNum() * a.getDenom(),
+		a.getDenom() * b.getDenom() );
+        soma.simplifica();
+	return soma;
+}
+//definicao do operador binario - como funcao global
+Fraccao operator-(const Fraccao & a, const Fraccao & b){
+	Fraccao sub( a.getNum() * b.getDenom() - b.getNum() * a.getDenom(),
+		a.getDenom() * b.getDenom() );
+        sub.simplifica();
+	return sub;
+}
+//definicao do operador binario * como funcao membro
+//Fraccao Fraccao::operator*( const Fraccao & b){
+//	cout << "Fraccao::operator*( const Fraccao & b) \n";
+//	Fraccao aux( num * b.num, denom * b.denom );
+//        aux.simplifica();
+//    
+//        return aux;
+//}
+//definicao do operador binario * como funcao global
+Fraccao operator*(const Fraccao & a, const Fraccao & b){
+	cout << "operator*(const Fraccao & a, const Fraccao & b) \n";
+	Fraccao aux( a.getNum() * b.getNum(),a.getDenom() * b.getDenom() );
+        aux.simplifica();
+	return aux;
+}
+//definicao do operador binario / como funcao global
+Fraccao operator/(const Fraccao & a, const Fraccao & b){
+	Fraccao aux( a.getNum() * b.getDenom() ,b.getNum() * a.getDenom());
+        aux.simplifica();
+	return aux;
+}
+
+//definicao do operador binario == como funcao global
+bool operator==(const Fraccao & a, const Fraccao & b){
+	return (a.getNum() * b.getDenom() == b.getNum() * a.getDenom());
+}
+
+//definicao do operador binario != como funcao global
+bool operator!=(const Fraccao & a, const Fraccao & b){
+	return (a.getNum() * b.getDenom() != b.getNum() * a.getDenom());
+}
+//definicao do operador binario << como funcao global
+ostream & operator<<( ostream & saida, const Fraccao & ob){
+	saida << ob.getAsString();
+
+	return saida;
+}

@@ -45,7 +45,7 @@ int main(){
 
 
 	Fraccao a(1,2),b(2,3),c(3,4);
-	cout << ((a *= b) *= c) << endl;
+	cout << ((a *= b) *= c) << endl; // se o oeprador nao for por referencia, vai fazer a mutiplicação sobre uma cópia, tendo um valor diferente ná proxima instrução
 	cout << a;		// l)
 
 	//cout << ++a;

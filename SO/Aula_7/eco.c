@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include "util.h"
 
 	int main(int argc, char** argv){
 
@@ -15,21 +16,20 @@
 
 	mkfifo("canal.txt", 0600);
 
-	fd = open("canal.txt",O_RDONLY);
+	fd = open("canal.txt",O_RDWR);
+	printf("A espera do primeiro produtor\n");
 
 	do{
 
-	 i = read(fd, str, 79);  //temos de usar ( ), caso contrario a comparação seria feita primeiro que a atribuição
-	if(i>0){
-		str[i] = '\0';
-		printf("%s (%d btes)", str,i);
-	}else if(i==0){
-	printf("Nao tenho produtores..");
-		sleep(1);
-	}
-	}while(strncmp(str,"desliga",7) != 0);
+		 i = read(fd, str, 79);  //temos de usar ( ), caso contrario a comparação seria feita primeiro que a atribuição
+		if(i>0){
+			str[i-1] = '\0';
+			printf("%s (%d bytes)\n", str,i);
+		}
+
+	}while(strcmp(str,"desliga") != 0);
 	close(fd);
-	printf("Vou terminar");
+	printf("Vou terminar\n");
 
 	unlink("canal.txt");
 
