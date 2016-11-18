@@ -51,12 +51,16 @@
 				//Pedido balcao
 				scanf("%s", cmd);
 				printf("\nComando introduzido: %s ", cmd);
+				//se cmd == a mostra coloca os clientes no servidor
 			}
 			if(FD_ISSET(fd, &conj_fd) ){
 
 				//pedido por email
 				 i = read(fd, &pedido, sizeof(pedido));
-				if(i>0){
+				if(i == sizeof(pedido)){
+					//vereficar se o pid existe na tabela de clientes
+					// Se nao existir Acrescenta
+					// se pedido.op == . Entao retira o pid da tabela de clientes
 					printf("Recebi um pedido (%d bytes)\n",i);
 					}
 	 			printf("\nPedido: n1: %d, n2 %d, op: %c pid: %d \n", pedido.n1, pedido.n2, pedido.op, pedido.pid);
@@ -74,6 +78,10 @@
 			}
 
 	}while(pedido.op != '!');
+
+	//avisar se os clientes vao embora
+	// percorre tabela de clientes e envia (kill)  um sigusr1 a cada um != 0 - má opccao
+	// Adpatar o cliente e enviar uma msg pelo fifo de cada clientes a dizer  -1
 	close(fd);
 	printf("Vou terminar\n");
 
