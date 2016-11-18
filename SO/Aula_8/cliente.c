@@ -31,9 +31,9 @@ int main(int argc, char** argv){
 
 		printf("\nnum 1: ");
 		scanf("%d", &pedido.n1);
-		printf("\nnum 2: ");
+		printf("num 2: ");
 		scanf("%d", &pedido.n2);
-		printf("\nQue op pretende realizar: ");
+		printf("Que op pretende realizar: ");
 		scanf(" %c", &pedido.op);
 
 
@@ -44,7 +44,7 @@ int main(int argc, char** argv){
 		i = read(fd_resp, &res, sizeof(res));
 		close(fd_resp);
 
-		printf("Recebi a resposta .... %d ( %d bytes) \n",res , i);
+		printf("\n\nRecebi a resposta .... %d ( %d bytes) \n",res , i);
 
 	}while(pedido.op  != '.' && pedido.op != '!');
 	close(fd);
