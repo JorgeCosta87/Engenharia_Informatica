@@ -2,14 +2,14 @@
 # Use project properties -> Build -> Qt -> Expert -> Custom Definitions.
 TEMPLATE = app
 DESTDIR = dist/Debug/GNU-Linux
-TARGET = QtApplication_1
+TARGET = teste
 VERSION = 1.0.0
 CONFIG -= debug_and_release app_bundle lib_bundle
 CONFIG += debug 
 PKGCONFIG +=
 QT = core gui widgets
-SOURCES += main.cpp scenemodifier.cpp
-HEADERS += scenemodifier.h
+SOURCES += main.cpp mouse.cpp
+HEADERS += mouse.h
 FORMS +=
 RESOURCES +=
 TRANSLATIONS +=
