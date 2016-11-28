@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -9,10 +8,11 @@
 #include <fcntl.h>
 #include "util.h"
 
+
 	int main(int argc, char** argv){
 
 
-	int i, fd, fd_resp, res;
+	int i,j, fd, fd_resp, res, cliente[5] = {0,0,0,0,0};
 	char str[80], cmd[20];
 	PEDIDO pedido;
 
@@ -41,42 +41,52 @@
 
 		ret = select(fd+1, &conj_fd, NULL, NULL, &tempo); //fd+1  ficheiro no descritor de ficheiros  mais alto + 1 
 
-		if(ret == 0 ) // acabou os 3.5 segundos e não havia dados
+		if(ret > 0 ) // acabou os 3.5 segundos e não havia dados
 		{
-			printf(".");
-			fflush(stdout);
-		}
-		else if (ret > 0){
+		
+		if (ret > 0){
 			if(FD_ISSET(0, &conj_fd) ){ // no teclado
 				//Pedido balcao
 				scanf("%s", cmd);
-				printf("\nComando introduzido: %s ", cmd);
+				printf("Comando introduzido: %s ", cmd);
+				if(strcmp(cmd,"mostra") == 0)
+					for(j = 0 ; j < 5 ; j++)
+						printf("Cliente[%d] = %d\n", j, cliente[j]);
 				//se cmd == a mostra coloca os clientes no servidor
 			}
 			if(FD_ISSET(fd, &conj_fd) ){
 
 				//pedido por email
 				 i = read(fd, &pedido, sizeof(pedido));
-				if(i == sizeof(pedido)){
+				if(i == sizeof(pedido))
+				{
+					for(int j = 0 ; j <5 ;j++){
+						if(cliente[j] != pedido.pid)
+							cliente[j] = pedido.pid;
+							
+					}
 					//vereficar se o pid existe na tabela de clientes
 					// Se nao existir Acrescenta
 					// se pedido.op == . Entao retira o pid da tabela de clientes
-					printf("Recebi um pedido (%d bytes)\n",i);
+					printf("\nRecebi um pedido (%d bytes)",i);
 					}
 	 			printf("\nPedido: n1: %d, n2 %d, op: %c pid: %d \n", pedido.n1, pedido.n2, pedido.op, pedido.pid);
 				res = pedido.n1 + pedido.n2;
 
+
 				//ENVIAR RESP
+				if(cliente[j] != 0 ){
 
-				sprintf(str,"ccc%d", pedido.pid);
-				fd_resp = open(str,O_WRONLY);
-	               		 i = write(fd_resp, &res, sizeof(res));
-        	        	close(fd_resp);
-
-	                	printf("\nEnviei a resposta .... %d ( %d bytes) \n",res , i);
+					sprintf(str,"ccc%d", cliente[j]);
+					fd_resp = open(str,O_WRONLY);
+	        	       		 i = write(fd_resp, &res, sizeof(res));
+        		        	close(fd_resp);
+	
+	                		printf("\nEnviei a resposta .... %d ( %d bytes) \n",res , i);
+				}
 				}
 			}
-
+		}
 	}while(pedido.op != '!' && strcmp(cmd, "sai") != 0);
 
 	//avisar se os clientes vao embora
