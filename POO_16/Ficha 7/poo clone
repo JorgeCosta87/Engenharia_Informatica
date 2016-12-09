@@ -1,0 +1,18 @@
+Quando usamos o = por defautla este copia tudo, insclusive os ponteios de um vector, e estes ficam a apontar para o mesmom,
+em vez que criar copias destes
+
+
+
+
+
+peixes.push_back(new Peixe(*ob.peixes[i] // neste caso criamos uma copia deste objecto, mas aqui sabemos que tipo é PEIXE
+
+
+//Para criar novos sem saber o seu tipo
+é um função virtual
+Livro * Livro::duplica() const{
+Livro * p = new Livro(*this)
+}
+
+
+nota o construtor por copia do vector mete o varlores deste a zero.
