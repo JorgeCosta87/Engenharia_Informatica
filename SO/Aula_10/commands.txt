@@ -1,0 +1,88 @@
+comamands bash
+
+ficheiros
+/bin
+/sbincd 
+/dev
+/dev/null
+/tmp
+/etc		 //confiruação sistemas, grupos
+/etc/passwd	 //users
+
+	LOGIN:PASSWORD:UID:GID:NAME:HOME:COMMAND
+ex:	joao:x:105:107:joao costa:/home/joao:/bin/bash
+
+
+/etc/group 	//groups
+
+	GROUP:PASSWORD:GID:MEMBERS
+ex:	isec:x:120:joao
+
+
+/etc/shadow	//passwords
+
+	LOGIN:PASSWORD (SHA512)
+
+
+Commands
+.	- current directory
+.. 
+/ 	- system root
+~	- home directory
+*
+?
+[]
+<	-stdin	$CMD > File
+> >>	-stdout
+2>	-stderr
+|	-pipe 	$CMD | CMD
+
+id
+who
+finger
+echo 	-e (to use special caracthers \n)
+tr	-s
+wc	-c -w -e
+head	-n  ex: cat file.txt |tail -n 3 | head -n 1 (antepnultimo)
+tail	-n  + or - (+ enter on the front)
+grep	<-----	^(begin)  $(end)ex:  [<words>] ex: cat file.txt |grep "^[^pP]"  (^ iniside menas negation) .(char)
+cut	-c -f ex: (field ex cat file.txt | cut -f2,3 -d:  (field 2 and 3  and the separator is :)
+sort 	-k(field)  -t(separator)  -n(order be number) -r(reverse order)
+ 
+ex: cat users | cut -f1,3 -d: | sort -k2 -t: -n -r | tr ":" "\t" | head -n 3
+ex: ls -l | tail -n+2 | wc -l (jumps the first line) 
+ex: ls -l | tr -s " " (squezze the spaces)
+lsscsi
+find -name -perm -type -executable 
+	what to do -exec a cmd or  - print
+
+
+basic cmds:
+ls cd mkdir rmdir cp mv rm
+tree
+
+Permissions:
+chmod
+
+ex: chmod 640 <ilfe>
+ex: chmod u=rw, g=r, o= <file> same as above
+
+chown
+
+ex: chown so.sudo (the file belong to me but the new group is sudo)
+
+
+type of files:
+
+- regular
+d (directory)
+l (link)
+p (namedpipe
+b (block device)
+c (character device)
+
+
+
+
+
+
