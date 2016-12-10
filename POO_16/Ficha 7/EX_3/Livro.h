@@ -1,27 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/* 
- * File:   Livro.h
- * Author: costa
- *
- * Created on 6 de Dezembro de 2016, 23:16
- */
 
 #ifndef LIVRO_H
 #define LIVRO_H
 
-class Livro {
+
+#include <string>
+
+using namespace std;
+
+class Livro{
+	string titulo;
+	string autor;
+	long isbn;	
 public:
-    Livro();
-    Livro(const Livro& orig);
-    virtual ~Livro();
-private:
+	Livro(string t, string a, long i);
+	virtual ~Livro(){}
+        
+	void setTitulo( string s);
+	void setAutor( string a);
+	void setIsbn(long i);
+	string getTitulo() const;
+	string getAutor() const;
+	long getIsbn() const;
 
+	virtual string getAsString() const;
+
+	virtual Livro * duplica()const;
 };
+bool operator==( const Livro & ob1, const Livro & ob2);
 
-#endif /* LIVRO_H */
+ostream & operator<<(ostream & saida, const Livro & x);
 
+#endif

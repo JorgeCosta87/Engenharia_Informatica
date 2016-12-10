@@ -4,11 +4,8 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>Biblioteca.h</itemPath>
-      <itemPath>Ficcao.h</itemPath>
-      <itemPath>Interaccao.h</itemPath>
-      <itemPath>Livro.h</itemPath>
-      <itemPath>Policial.h</itemPath>
+      <itemPath>Aquario.h</itemPath>
+      <itemPath>Peixe.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -17,11 +14,8 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>Biblioteca.cpp</itemPath>
-      <itemPath>Ficcao.cpp</itemPath>
-      <itemPath>Interaccao.cpp</itemPath>
-      <itemPath>Livro.cpp</itemPath>
-      <itemPath>Policial.cpp</itemPath>
+      <itemPath>Aquario.cpp</itemPath>
+      <itemPath>Peixe.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -49,25 +43,13 @@
           <standard>8</standard>
         </ccTool>
       </compileType>
-      <item path="Biblioteca.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Aquario.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Biblioteca.h" ex="false" tool="3" flavor2="0">
+      <item path="Aquario.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Ficcao.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Peixe.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Ficcao.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Interaccao.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Interaccao.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Livro.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Livro.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Policial.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Policial.h" ex="false" tool="3" flavor2="0">
+      <item path="Peixe.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -92,25 +74,13 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
-      <item path="Biblioteca.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Aquario.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Biblioteca.h" ex="false" tool="3" flavor2="0">
+      <item path="Aquario.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Ficcao.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Peixe.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="Ficcao.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Interaccao.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Interaccao.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Livro.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Livro.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Policial.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="Policial.h" ex="false" tool="3" flavor2="0">
+      <item path="Peixe.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
