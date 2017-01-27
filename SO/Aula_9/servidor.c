@@ -89,9 +89,6 @@
 		}
 	}while(pedido.op != '!' && strcmp(cmd, "sai") != 0);
 
-	//avisar se os clientes vao embora
-	// percorre tabela de clientes e envia (kill)  um sigusr1 a cada um != 0 - má opccao
-	// Adpatar o cliente e enviar uma msg pelo fifo de cada clientes a dizer  -1
 	close(fd);
 	printf("Vou terminar\n");
 
