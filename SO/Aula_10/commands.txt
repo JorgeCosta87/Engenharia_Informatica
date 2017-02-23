@@ -81,8 +81,112 @@ p (namedpipe
 b (block device)
 c (character device)
 
+ aula 11
+
+groupadd coimbra
+useradd -m -c "jose Pedro" -s /bin/bash -g users -G coimbra joao
+passwd joao
+
+userdel -r (remover a home) joao
+groupdel coimbra
+
+costa username>@localhost -p 2224
+
+hostname
+uname -a
+
+script
+
+" " (u can put inside( * $ ``)
+
+' ' (return all the information inside as a string the (* $ ``) doesn't work here
+
+`<cmd>` or $(<cmd>) put the result of the cmd on the place it was call
+
+\ escape ex: \* the * lose it meaning
+
+* all the files of the shell in that dir
+
+ex: echo "teste * `pwd` $home"
+
+exemploe
+
+	$nome="Joao Pedro"
+	echo "Eu sou o ${nome} e estou na pasta
+
+ex 21
 
 
 
+ls -l /home/`<resultado do comando anterior>`
 
+ls -l /home/`finger | tail -n +2 | tr -s " " | sort -k2 -t" " | tail -n 1 | cut -d" " -f1` | tail -n +2 | tr -s " " | cut -d" " -f5 | sort -n | tail -n 1
+
+
+example of a varialbe that store the result of a comand  $ pasta=$(<the last cmd> )
+
+ex 24
+$ <-- end of line on grep
+
+cat /etc/passwd | grep ":/bin/bash$" |tail -n +2 | head -n 1 | cut -d: -f1
+
+next we need to put this comand with an ls, like the ex 21
+
+ex 23
+ 
+ls -l `find /bin maxdepth 1 -size +100k -print`
+
+
+
+ we can use the find
+find
+
+-maxdepth 1 (just shearch on this dir ) -size + 1000c (files that are superior t 1000 characteres or bytes)
+-type < type of file>
+-user <ver handy>
+
+
+aula 11
+
+`cmd`
+'str'
+$var
+\char
+$(cmd)
+${var}
+
+
+mascaras
+
+* - 0 a n chars
+? 1 char
+[...] 1 char
+
+ls - l | tail -n +2 | grep "txt$"
+
+or
+
+ls -l *txt --> (ficherios que têm varios caracteres antes de txt
+
+se tivermos dois separadores em vez de um usamos o tr -s " " e ficamos so com uma espçao a seprar
+
+ls -l *txt | tr -s " " | sort -t" " -k5 -n | head -n 1 | cut -d" " -f9 > resultado.txt ----->> vai buscar o nome do um ficheiro de texto
+
+o find pode logo ordenar os ls
+buscar os ultimos 5 users de passwd
+
+cat /etc/passwd | tail -n 5 | cut -d":" -f5 | cut -d" " -f1 | tr "\n" ","
+
+buscar apenas o lopes continuçã anterior mais | grep " Lopes$" espçao e dolar
+
+mascaras:
+
+ls -l [dr]????*txt  o primeiro caracters so pode ser d ou r , o ? signica um caracter 
+
+[a - z]
+[a-z A-Z 0-9]
+
+
+:w
+:w
 

@@ -19,8 +19,9 @@ int main(int argc, char** argv){
 		a = getpid();
 		wait(&estado);
 	}
-	sleep(10);
-	printf("\nPID: %d\n",a);
+	sleep(5);
+	
+	printf("\nPID: %d\nEstado: %d\n",a, estado);
 
-	exit(0);
+	exit(2);
 }

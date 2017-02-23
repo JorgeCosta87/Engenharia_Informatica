@@ -4,40 +4,42 @@
 #include <signal.h>
 #include <time.h>
 
-int num1, num2, N, i;
+int num1, num2, N = 5, i = 0, n = 0;
 
-void demorou(int n){
+void demorou(){
 
-	if(i == 2)
-		exit(1);
+	num1 = rand() % 9;
+	num2 = rand() % 9;
 
-        num1 = rand() % 101;
-        num2 = rand() % 101;
-	N--;
-        printf("\n %d %d", num1, num2);
+	printf("\n %d x %d : ", num1, num2); 
+	fflush(stdout);
+
 	alarm(N);
 }
 
 
 int main(int argc, char** argv){
 
-	int n;
 	time_t t;
-	N = 20;
 
 	signal(SIGALRM, demorou);
  	srand((unsigned) time(&t));
-	demorou(14);
-	scanf("%d" ,&n);
+	
+	while (i != 2)
+	{
+		demorou();
+		scanf("%d" ,&n);
 
-	if(n == (num1 * num2))
-	{
-		printf("Acertou\n");
-		i = 0;
-	}else{
-		printf("Falhou\n");
-		i++;
-	{
+		if(n == (num1 * num2))
+		{
+			printf("\nAcertou\n");
+			i = 0;
+			N--;
+		}else{
+			printf("Falhou\n");
+			i++;
+		}
+	}
 
 	return 0;
 }

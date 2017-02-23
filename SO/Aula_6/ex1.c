@@ -8,7 +8,7 @@ void call(int n){
 	if (c==5)
 		exit(1);
 
-	printf("\nai\n");
+	printf("\n%d\n",c);
 	c++;
 }
 
@@ -18,6 +18,7 @@ int main(int argc, char** argv){
 
 	signal(SIGINT, call);
 
+	while(1) pause();
 	scanf("%s", str);
 
 	printf("hey %s\n", str);
