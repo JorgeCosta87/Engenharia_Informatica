@@ -67,11 +67,11 @@ where l.CODIGO_AUTOR = a.CODIGO_AUTOR;
 select nome
 from autores
 Minus
-select nome
+select a.nome
 from autores a, livros l
 where l.CODIGO_AUTOR = a.CODIGO_AUTOR
 union
 select nome
-from livros
+from autores, livros
 where to_char(DATA_EDICAO, 'yyyy') = to_char(sysdate , 'yyyy');
 
