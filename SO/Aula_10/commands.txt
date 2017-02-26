@@ -1,4 +1,4 @@
-comamands bash
+﻿comamands bash
 
 ficheiros
 /bin
@@ -6,7 +6,7 @@ ficheiros
 /dev
 /dev/null
 /tmp
-/etc		 //confiruação sistemas, grupos
+/etc		 //system configuration and groups info
 /etc/passwd	 //users
 
 	LOGIN:PASSWORD:UID:GID:NAME:HOME:COMMAND
@@ -45,7 +45,7 @@ tr	-s
 wc	-c -w -e
 head	-n  ex: cat file.txt |tail -n 3 | head -n 1 (antepnultimo)
 tail	-n  + or - (+ enter on the front)
-grep	<-----	^(begin)  $(end)ex:  [<words>] ex: cat file.txt |grep "^[^pP]"  (^ iniside menas negation) .(char)
+grep	<-----	^(begin)  $(end)ex:  [<words>] ex: cat file.txt |grep "^[^pP]"  (^ iniside negation) .(char)
 cut	-c -f ex: (field ex cat file.txt | cut -f2,3 -d:  (field 2 and 3  and the separator is :)
 sort 	-k(field)  -t(separator)  -n(order be number) -r(reverse order)
  
@@ -123,7 +123,7 @@ ls -l /home/`<resultado do comando anterior>`
 ls -l /home/`finger | tail -n +2 | tr -s " " | sort -k2 -t" " | tail -n 1 | cut -d" " -f1` | tail -n +2 | tr -s " " | cut -d" " -f5 | sort -n | tail -n 1
 
 
-example of a varialbe that store the result of a comand  $ pasta=$(<the last cmd> )
+example of a varialbe that store the result of a command  $ pasta=$(<the last cmd> )
 
 ex 24
 $ <-- end of line on grep
