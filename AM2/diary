@@ -1,0 +1,155 @@
+pwd
+
+ans =
+
+/home/costa/Repos/Engenharia_Informatica/AM2
+
+v = 1 :0.3 :2
+
+v =
+
+    1.0000    1.3000    1.6000    1.9000
+
+edit PAv1
+help PAv1
+ Gera um vetor v com n elementos uma PA(progressão aritmetica
+ Inputs:
+  v1 - 1º elemento da PA
+  r  - razão/incremento/passo da PA
+  output:
+  v - vetorcom n elementos da PA
+  Autor:
+ Data ou versão
+
+clc
+pAv1(0,1,10)
+{Cannot find an exact (case-sensitive) match for 'pAv1'
+
+The closest match is: PAv1 in /home/costa/Repos/Engenharia_Informatica/AM2/PAv1.m
+} 
+pAv1(0,1,10)
+{Cannot find an exact (case-sensitive) match for 'pAv1'
+
+The closest match is: PAv1 in /home/costa/Repos/Engenharia_Informatica/AM2/PAv1.m
+} 
+PAv1(0,1,10)
+
+ans =
+
+     0     1     2     3     4     5     6     7     8     9
+
+whos
+  Name      Size            Bytes  Class     Attributes
+
+  ans       1x10               80  double              
+  v         1x4                32  double              
+
+clc
+PAv1
+{Not enough input arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('PAv1', '/home/costa/Repos/Engenharia_Informatica/AM2/PAv1.m', 12)" style="font-weight:bold">PAv1</a> (<a href="matlab: opentoline('/home/costa/Repos/Engenharia_Informatica/AM2/PAv1.m',12,0)">line 12</a>)
+if (n < 1)
+} 
+PAv1(0,1,10)
+
+ans =
+
+     0     1     2     3     4     5     6     7     8     9
+
+PAv1(0,1,-2)
+O número de elementos deve ser superior a 0
+PAv2(0,1,)
+ PAv2(0,1,)
+          ↑
+{Error: Unbalanced or unexpected parenthesis or bracket.
+} 
+PAv2(0,1,4)
+{Error: <a href="matlab: opentoline('/home/costa/Repos/Engenharia_Informatica/AM2/PAv2.m',25,5)">File: PAv2.m Line: 25 Column: 5
+</a>"i" previously appeared to be used as a function or command, conflicting with its use here as the name of a variable.
+A possible cause of this error is that you forgot to initialize the variable, or you have initialized it implicitly using
+load or eval.
+} 
+PAv2(0,1,4)
+
+v =
+
+     1     0     0     0
+
+
+v =
+
+     1     2     0     0
+
+
+v =
+
+     1     2     3     0
+
+
+v =
+
+     1     2     3     4
+
+
+ans =
+
+     1     2     3     4
+
+PAv2(0,1,4)
+
+ans =
+
+     1     2     3     4
+
+PAv2(0,1,4)
+
+ans =
+
+     1     2     3     4
+
+PAv4(0,1,4)
+
+v =
+
+     0     1     2     3
+
+
+ans =
+
+     0     1     2     3
+
+PAv3(0,1,4)
+
+ans =
+
+     1     2     3     4
+
+edit
+teste
+Introduza o 1º elemento da Pa1
+introduza a razão da PA1
+indique o número de elemtnos1
+1
+
+ans =
+
+     1
+
+teste
+Introduza o 1º elemento da Pa: ts
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('input')" style="font-weight:bold">input</a>
+Undefined function or variable 's'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('teste', '/home/costa/Repos/Engenharia_Informatica/AM2/teste.m', 3)" style="font-weight:bold">teste</a> (<a href="matlab: opentoline('/home/costa/Repos/Engenharia_Informatica/AM2/teste.m',3,0)">line 3</a>)
+v1 = input('Introduza o 1º elemento da Pa: \t');
+} 
+Introduza o 1º elemento da Pa: ts
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('input')" style="font-weight:bold">input</a>
+Undefined function or variable 's'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('teste', '/home/costa/Repos/Engenharia_Informatica/AM2/teste.m', 3)" style="font-weight:bold">teste</a> (<a href="matlab: opentoline('/home/costa/Repos/Engenharia_Informatica/AM2/teste.m',3,0)">line 3</a>)
+v1 = input('Introduza o 1º elemento da Pa: \t');
+} 
+Introduza o 1º elemento da Pa: t{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('teste', '/home/costa/Repos/Engenharia_Informatica/AM2/teste.m', 3)" style="font-weight:bold">teste</a> (<a href="matlab: opentoline('/home/costa/Repos/Engenharia_Informatica/AM2/teste.m',3,0)">line 3</a>)
+} 

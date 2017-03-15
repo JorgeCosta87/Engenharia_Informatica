@@ -1,0 +1,7 @@
+﻿  Source.cpp
+\\vboxsvr\repos\engenharia_informatica\so2\fx1_ex5\fx1_ex5\source.cpp(15): warning C4101: 'versao': unreferenced local variable
+\\vboxsvr\repos\engenharia_informatica\so2\fx1_ex5\fx1_ex5\source.cpp(16): warning C4101: 'autor': unreferenced local variable
+\\vboxsvr\repos\engenharia_informatica\so2\fx1_ex5\fx1_ex5\source.cpp(15): warning C4101: 'tamanho': unreferenced local variable
+\\vboxsvr\repos\engenharia_informatica\so2\fx1_ex5\fx1_ex5\source.cpp(16): warning C4101: 'str': unreferenced local variable
+  FX1_EX5.vcxproj -> \\VBOXSVR\Repos\Engenharia_Informatica\SO2\FX1_EX5\Debug\FX1_EX5.exe
+  FX1_EX5.vcxproj -> \\VBOXSVR\Repos\Engenharia_Informatica\SO2\FX1_EX5\Debug\FX1_EX5.pdb (Full PDB)
