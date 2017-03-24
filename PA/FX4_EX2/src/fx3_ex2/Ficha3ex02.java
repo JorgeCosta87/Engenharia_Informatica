@@ -5,6 +5,11 @@
  */
 package fx3_ex2;
 
+import fx3_ex2.logica.Biblioteca;
+import fx3_ex2.logica.Livro;
+import fx3_ex2.logica.LivroActual;
+import fx3_ex2.logica.LivroAntigo;
+
 /**
  *
  * @author Admin2

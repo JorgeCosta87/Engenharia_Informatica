@@ -1,5 +1,6 @@
-package fx3_ex2;
+package fx3_ex2.logica;
 
+import fx3_ex2.logica.Livro;
 import java.util.HashMap;
 import java.util.List;
 import java.util.HashSet;

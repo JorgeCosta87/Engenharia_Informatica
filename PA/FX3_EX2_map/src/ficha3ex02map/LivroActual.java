@@ -1,6 +1,6 @@
 
 
-package fx3_ex2;
+package ficha3ex02map;
 
 public class LivroActual extends Livro{
     private String ISBN;

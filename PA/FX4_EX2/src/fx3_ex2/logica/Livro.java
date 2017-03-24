@@ -1,12 +1,16 @@
 
-package fx3_ex2;
+package fx3_ex2.logica;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Livro {
+public class Livro implements Comparable<Livro>, Serializable{
 
+    static
     private static int ordemCriacao = 0;
+    
+    
     private int codigo;
     private String titulo;
     private List<String> autores = new ArrayList<String>();
@@ -61,7 +65,13 @@ public class Livro {
     }
 
 
-  
+
+
+
+    @Override
+    public int compareTo(Livro o) {
+            return titulo.compareTo(o.getTitulo());
+    }
     
 
     
