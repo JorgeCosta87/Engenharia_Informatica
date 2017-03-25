@@ -1,0 +1,11 @@
+tagarela 111       25
+poucotempo 222 25
+poucotempo 333 20
+tagarela 444 20
+xxx 555 30
+tagarela aaa
+tagarela
+tagarela 333 
+tagarela 111 30
+poucotempo 222 40
+tagarela 123 50

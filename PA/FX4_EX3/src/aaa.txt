@@ -1,0 +1,4 @@
+ Tagarela:  numero: 123 saldo: 42.98
+ chamadas:
+[ dest: 555 duracao: 6060 custo: 2.5,  dest: 999 duracao: 12120 custo: 4.5200000000000005]
+
