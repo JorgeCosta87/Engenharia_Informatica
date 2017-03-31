@@ -94,15 +94,15 @@ function figure1_CreateFcn(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
-
+    screensize = get(0,'ScreenSize');
     %Define o tamanho da figure
-    boxSize = [1250 750];
+    boxSize = [0.65 0.69];
     
     %Obtém a dimensão do ecrã
     screensize = get(0,'ScreenSize');
     xPos = ceil(screensize(3) / 2) - (boxSize(1)/2);
     yPos = ceil(screensize(4) / 2) - (boxSize(2)/2);
-    set(hObject,'Units','Pixels');
+    set(hObject,'Units','normalized');
     set(hObject,'Position',[xPos, yPos, boxSize(1), boxSize(2)]);
          
 
