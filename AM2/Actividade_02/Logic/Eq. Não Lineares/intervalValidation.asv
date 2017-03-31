@@ -1,0 +1,43 @@
+%Descrição:
+%
+%
+%
+%Intput
+%
+%
+%Output
+% 0 - OK
+% 1 - Não é um número real
+% 2 - Fora do intervalo [a, b]
+% 3 - Condição não cumprida f(x0) * f''(x0) > 0
+%
+
+function value=intervalValidation(f, a, b)
+    
+    if((isscalar(a) && isreal(a)
+        
+    end
+       isscalar(b) && isreal(a) && isreal(b) && a < b))
+        value = [];
+        return;
+    end
+    
+   if (f(a) * f(b) < 0)
+            value = 1;
+        else
+            value = [];
+   end  
+end
+
+%     switch(metodo)
+%         case 'radioBi'
+%           
+%                 
+%         case 'radioTg'
+% 
+%         case 'radioPf'
+% 
+%         case 'radioFp'
+% 
+%         case 'radioSe'
+%     end
