@@ -22,7 +22,7 @@ function varargout = AM2(varargin)
 
 % Edit the above text to modify the response to help AM2
 
-% Last Modified by GUIDE v2.5 28-Mar-2017 02:57:40
+% Last Modified by GUIDE v2.5 02-Apr-2017 02:20:11
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -43,7 +43,6 @@ else
 end
 % End initialization code - DO NOT EDIT
 
-global feq
 
 % --- Executes just before AM2 is made visible.
 function AM2_OpeningFcn(hObject, eventdata, handles, varargin)
@@ -73,6 +72,7 @@ axis image
 
 
 
+
 % UIWAIT makes AM2 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
@@ -93,18 +93,18 @@ function figure1_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to figure1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
-
-    screensize = get(0,'ScreenSize');
     %Define o tamanho da figure
-    boxSize = [0.65 0.69];
+    boxSize = [1248 745];
     
     %Obtém a dimensão do ecrã
     screensize = get(0,'ScreenSize');
     xPos = ceil(screensize(3) / 2) - (boxSize(1)/2);
     yPos = ceil(screensize(4) / 2) - (boxSize(2)/2);
-    set(hObject,'Units','normalized');
+    set(hObject,'Units','pixels');
     set(hObject,'Position',[xPos, yPos, boxSize(1), boxSize(2)]);
          
+    %set(hObject,'Units','Pixels','Position',get(0,'ScreenSize'))
+
 
 % --- Executes on button press in btnPg.
 function btnPg_Callback(hObject, eventdata, handles)
@@ -133,6 +133,7 @@ function btnEq_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 set(handles.panelEq,'Visible','on');
+
 
 % --- Executes on button press in btnPgAritmetica.
 function btnPgAritmetica_Callback(hObject, eventdata, handles)
@@ -393,10 +394,27 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
 % hObject    handle to btnEqGerar (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+    %Obtém os dados necessários para a execução/validação dos métodos
+    f = FRvr(get(handles.editF,'String'));
+    a = str2num(get(handles.editA,'String'));
+    b = str2num(get(handles.editB,'String'));
+    x0 = str2num(get(handles.editEqX0,'String'));
+    x1 = str2num(get(handles.editEqX1,'String'));
+    kmax = round(str2num(get(handles.editEqKmax,'String')));
+    tol = str2num(get(handles.editEqTol,'String'));
+    metodo = get(get(handles.btnRadioGrp,'SelectedObject'),'Tag');
     
     %Prepara o ambiente para a execuação dos métodos
-    set(hObject,'Enable', 'off');
-    resetPlot(handles,true,true,true,true,true);
+    valid = completeValidation(handles,f,a,b,x0,x1,kmax,tol,metodo);
+    
+    if(~valid)
+        return;
+    end;
+    showMessage(handles,'','g');
+    setUserinteraction(handles, false);
+    
+    
     %O modo de como vai ser apresentado o gráfico
     %1- animação 2- step 3- none
     mode =  get(get(handles.btnModeGrp,'SelectedObject'),'Tag');
@@ -404,65 +422,57 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
         set(handles.btnEqStep,'Enable','on');
     end
     
-    %Obtém os dados necessários para a execução dos métodos
-    f = FRvr(get(handles.editF,'String'));
-    a = str2num(get(handles.editA,'String'));
-    b = str2num(get(handles.editB,'String'));
-    kmax = str2num(get(handles.editEqKmax,'String'));
-    tol = str2num(get(handles.editEqTol,'String'));
-    
-    metodo = get(get(handles.btnRadioGrp,'SelectedObject'),'Tag');
-    
     switch (metodo)
       
         case 'radioBi'
                
-               biRet = MBissecao(handles,f,a,b,kmax,tol, mode);
+               [biRet, k] = MBissecao(handles,f,a,b,kmax,tol, mode);
                
                %Apresenta as aproximações na tabela
                set(handles.tableEq,'Data',biRet);
-               set(handles.textBiAprox,'String',num2str(biRet(1,end)));
-               set(handles.textBiIt,'String',biRet(2,1));
+               set(handles.textBiAprox,'String',biRet(end));
+               set(handles.textBiIt,'String',k);
            
         case 'radioTg'
                 df   = diff(f(sym('x')));
                 df_dx   = @(x) eval(vectorize(char(df)));
                 
-               tgRet = MTangentes(handles,f,df_dx,str2num(get(handles.editEqX0,'String')),kmax,tol,mode);
+               [tgRet, k] = MTangentes(handles,f,df_dx,str2num(get(handles.editEqX0,'String')),kmax,tol,mode);
                 
                %Apresenta as aproximações na tabela
-               set(handles.tableEq,'Data',tgRet);
-               set(handles.textTgAprox,'String',tgRet(1,end));
-               set(handles.textTgIt,'String',tgRet(2,1)); 
+               set(handles.tableEq,'Data', tgRet);
+               set(handles.textTgAprox,'String', tgRet(end));
+               set(handles.textTgIt,'String', k); 
                
         case 'radioPf'
-                pfRet = MPontoFixo(handles,f,str2num(get(handles.editEqX0,'String')),kmax,tol,mode);
+                [pfRet, k] = MPontoFixo(handles,f,str2num(get(handles.editEqX0,'String')),kmax,tol,mode);
                
                 %Apresenta as aproximações na tabela
-               set(handles.tableEq,'Data',pfRet);
-               set(handles.textPfAprox,'String',pfRet(1,end));
-               set(handles.textPfIt,'String',pfRet(2,1)); 
+               set(handles.tableEq,'Data', pfRet);
+               set(handles.textPfAprox,'String', pfRet(end));
+               set(handles.textPfIt,'String', k); 
                
         case 'radioFp'
-               FpRet = MFalsaPos(handles,f,a,b,kmax,tol,mode);
+               [FpRet, k] = MFalsaPos(handles,f,a,b,kmax,tol,mode);
 
                %Apresenta as aproximações na tabela
-               set(handles.tableEq,'Data',FpRet);
-               set(handles.textFpAprox,'String',num2str(FpRet(1,end)));
-               set(handles.textFpIt,'String',FpRet(2,1));
+               set(handles.tableEq,'Data', FpRet);
+               set(handles.textFpAprox,'String', FpRet(end));
+               set(handles.textFpIt,'String', k);
                
         case 'radioSe'
                 
-               seRet = MSecante(handles,f, str2num(get(handles.editEqX0,'String')),...
+               [seRet, k] = MSecante(handles,f, str2num(get(handles.editEqX0,'String')),...
                                 str2num(get(handles.editEqX1,'String')),kmax,tol,mode);
            
                %Apresenta as aproximações na tabela
-               set(handles.tableEq,'Data',seRet);
-               set(handles.textSeAprox,'String',seRet(1,end));
-               set(handles.textSeIt,'String',seRet(2,1));
+               set(handles.tableEq,'Data',seRet(3:end));
+               set(handles.textSeAprox,'String',seRet(end));
+               set(handles.textSeIt,'String',k);
      end
     
-    set(hObject,'Enable', 'on');
+    setUserinteraction(handles, true);
+    
     if(strcmp(mode,'radioEqStep'))
         set(handles.btnEqStep,'Enable','off');
     end
@@ -507,8 +517,7 @@ function editF_KeyPressFcn(hObject, eventdata, handles)
         feq = FRvr(get(handles.editF,'String'));
         
         if(isempty(feq))
-            set(handles.textEqFeedback, 'foregroundColor','r');
-            set(handles.textEqFeedback,'String','Enter a function of x');
+            showMessage(handles,'Enter a function of x','r');
         else
             set(handles.textEqFeedback,'String','');
             set(handles.editA,'Visible','on');
@@ -536,11 +545,17 @@ function editA_KeyPressFcn(hObject, eventdata, handles)
         a = str2num(get(handles.editA,'String'));
         
         if((isscalar(a) && isreal(a)))
+            set(handles.editB,'String','')
             resetPlot(handles,true,true,false,false,false);
             set(handles.textEqFeedback,'String','');
             set(handles.editB,'Visible','on');
-            set(handles.editB,'String','');
             set(handles.textEqB,'Visible','on');
+            set(handles.textEqX0,'Visible','off');
+            set(handles.editEqX0,'Visible','off');
+            set(handles.editEqX0,'String','');
+            set(handles.textEqX1,'Visible','off');
+            set(handles.editEqX1,'Visible','off');
+            set(handles.editEqX1,'String','');
         else
             resetPlot(handles,true,false,false,false,false);
             showMessage(handles,'Not a real number','r');
@@ -591,18 +606,24 @@ function editB_KeyPressFcn(hObject, eventdata, handles)
         val = intervalValidation(feq,a,b);
         if(val == 0)
              if(strcmp(metodo,'radioTg') || strcmp(metodo,'radioPf') || strcmp(metodo,'radioSe'))
-                resetPlot(handles,true,true,true,false,false);
+
                 set(handles.textEqFeedback,'String','');
                 set(handles.textEqX0,'Visible','on');
                 set(handles.editEqX0,'Visible','on');                
                 set(handles.editEqX0,'String','');
+                set(handles.textEqX1,'Visible','off');
+                set(handles.editEqX1,'Visible','off');
+                set(handles.editEqX1,'String','');
+                resetPlot(handles,true,true,true,false,false);
+                Show2Derivative(handles);
             else
                 resetPlot(handles,true,true,true,false,false);
-                set(handles.textEqFeedback, 'foregroundColor','g');
-                set(handles.textEqFeedback,'String','Tolerance argument is optional');
+                showMessage(handles,'Tolerance argument is optional','g');
                 set(handles.editEqKmax,'Visible','on');
                 set(handles.editEqKmax,'String','');
                 set(handles.textEqKmax,'Visible','on')
+                set(handles.editEqKmax,'String',20);
+                set(handles.btnEqGerar,'Enable','on');
                 set(handles.editEqTol,'Visible','on');
                 set(handles.editEqTol,'String','');
                 set(handles.textEqTol,'Visible','on');
@@ -661,7 +682,7 @@ function editEqX0_KeyPressFcn(hObject, eventdata, handles)
             feq =FRvr(get(handles.editF,'String'));
             metodo = get(get(handles.btnRadioGrp,'SelectedObject'),'Tag');
             
-            val = AproxValidation(handles,feq,x0,a,b)
+            val = AproxValidation(handles,feq,x0,a,b);
                 
             if(val == 0)
                  if(strcmp(metodo,'radioSe'))
@@ -670,12 +691,15 @@ function editEqX0_KeyPressFcn(hObject, eventdata, handles)
                     set(handles.textEqX1,'Visible','on');
                     set(handles.editEqX1,'Visible','on');
                     set(handles.editEqX1,'String','');
+                    Show2Derivative(handles)
                 else
                     resetPlot(handles,true,true,true,true,false);
                     showMessage(handles, 'Tolerance argument is optional', 'g');
                     set(handles.editEqKmax,'Visible','on');
                     set(handles.editEqKmax,'String','');
                     set(handles.textEqKmax,'Visible','on')
+                    set(handles.editEqKmax,'String',20);
+                    set(handles.btnEqGerar,'Enable','on');
                     set(handles.editEqTol,'Visible','on');
                     set(handles.editEqTol,'String','');
                     set(handles.textEqTol,'Visible','on');
@@ -686,7 +710,7 @@ function editEqX0_KeyPressFcn(hObject, eventdata, handles)
                 elseif(val == 2)
                     showMessage(handles,'x0 is invalid - Out of range [a b]','r');
                 elseif(val == 3)
-                    showMessage(handles,'x0 is invalid - f(x0) * f''(x0) > 0','r');
+                    showMessage(handles,'x0 is invalid - f(x0) * f''''(x0) > 0','r');
                 end
                 
                 resetPlot(handles,true,true,true,false,false);
@@ -697,8 +721,11 @@ function editEqX0_KeyPressFcn(hObject, eventdata, handles)
                 set(handles.textEqKmax,'Visible','off')
                 set(handles.editEqTol,'Visible','off');
                 set(handles.textEqTol,'Visible','off');
+                Show2Derivative(handles)
             end
         elseif(strcmp(eventdata.Key, 'backspace'))
+
+            
             resetPlot(handles,true,true,true,false,false);
             set(handles.editEqKmax,'Visible','off');
             set(handles.textEqKmax,'Visible','off');
@@ -708,6 +735,7 @@ function editEqX0_KeyPressFcn(hObject, eventdata, handles)
             set(handles.textEqX1,'Visible','off');
             set(handles.editEqX1,'Visible','off');
             set(handles.textEqFeedback,'String','');
+            Show2Derivative(handles);
         end  
 
         
@@ -726,17 +754,22 @@ function editEqX1_KeyPressFcn(hObject, eventdata, handles)
                 pause(0.01);
                 a = str2num(get(handles.editA,'String'));
                 b = str2num(get(handles.editB,'String'));
+                x0 = str2num(get(handles.editEqX0,'String'));
                 x1 = str2num(get(handles.editEqX1,'String'));
                 feq =FRvr(get(handles.editF,'String'));
+                metodo = get(get(handles.btnRadioGrp,'SelectedObject'),'Tag');
                 
                 %validação do x1
                 val = AproxValidation(handles,feq,x1,a,b)
-                
-                if(val == 0)
+                if(x1 < x0)
+                    showMessage(handles,'x1 is less than x0','r');
+                elseif(val == 0)
                     resetPlot(handles,true,true,true,true,true);
                     showMessage(handles,'Tolerance argument is optional','g');
                     set(handles.editEqKmax,'Visible','on');
                     set(handles.textEqKmax,'Visible','on')
+                    set(handles.editEqKmax,'String',20);
+                    set(handles.btnEqGerar,'Enable','on');
                     set(handles.editEqTol,'Visible','on');
                     set(handles.textEqTol,'Visible','on');
                 else
@@ -745,7 +778,7 @@ function editEqX1_KeyPressFcn(hObject, eventdata, handles)
                     elseif(val == 2)
                         showMessage(handles,'x0 is invalid - Out of range [a b]','r');
                     elseif(val == 3)
-                        showMessage(handles,'x0 is invalid - f(x0) * f''(x0) > 0','r');
+                        showMessage(handles,'x0 is invalid - f(x0) * f''''(x0) > 0','r');
                     end
                     
                     resetPlot(handles,true,true,true,true,false);
@@ -756,6 +789,7 @@ function editEqX1_KeyPressFcn(hObject, eventdata, handles)
                     set(handles.editEqTol,'Visible','off');
                     set(handles.textEqTol,'Visible','off');
                     set(handles.editEqTol,'String','');
+                    Show2Derivative(handles);
                 end
             elseif(strcmp(eventdata.Key, 'backspace'))
                 resetPlot(handles,true,true,true,true,false);
@@ -765,6 +799,7 @@ function editEqX1_KeyPressFcn(hObject, eventdata, handles)
                 set(handles.textEqTol,'Visible','off');
                 set(handles.btnEqGerar,'Enable','off');
                 set(handles.textEqFeedback,'String','');
+                Show2Derivative(handles);
     end  
 
 function editEqKmax_KeyPressFcn(hObject, eventdata, handles)
@@ -777,11 +812,15 @@ function editEqKmax_KeyPressFcn(hObject, eventdata, handles)
   if(strcmp(eventdata.Key, 'return'))
         pause(0.01);
         Kmax = str2num(get(handles.editEqKmax,'String'));
+        Kmax = round(Kmax);
+        
         if(~(isscalar(Kmax) && isreal(Kmax)))
             resetPlot(handles,true,true,true,true,true);
             set(handles.editEqKmax,'String','');
             showMessage(handles,'Not a real number','r');
             set(handles.btnEqGerar,'Enable','off');
+        elseif(Kmax <= 0)
+            showMessage(handles,'Only positive numbers allowed','r');
         else
             resetPlot(handles,true,true,true,true,true);
             showMessage(handles,'Tolerance argument is optional','g');
@@ -790,6 +829,7 @@ function editEqKmax_KeyPressFcn(hObject, eventdata, handles)
         end
   elseif(strcmp(eventdata.Key, 'backspace'))
     resetPlot(handles,true,true,true,true,true);
+    showMessage(handles,'','g');
     set(handles.btnEqGerar,'Enable','off');
   end
 
@@ -804,23 +844,32 @@ function editEqTol_KeyPressFcn(hObject, eventdata, handles)
   if(strcmp(eventdata.Key, 'return'))
         pause(0.01);
         tol = str2num(get(handles.editEqTol,'String'));
+        
+        metodo = get(get(handles.btnRadioGrp,'SelectedObject'),'Tag');
+        
         if(~(isscalar(tol) && isreal(tol)))
             resetPlot(handles,true,true,true,true);
             set(handles.editEqTol,'String','');
             showMessage(handles,'Not a real number','r');
+        elseif(tol <= 0)
+            showMessage(handles,'Only positive numbers allowed','r');
         else
             resetPlot(handles,true,true,true,true,true);
             set(handles.textEqFeedback,'String','');
             
-            %Calcular o número de iterações necessárias
-            a = str2num(get(handles.editA,'String'));
-            b = str2num(get(handles.editB,'String'));
-            n = ceil(log2((b-a)/tol));
-            str = sprintf('Tip: To achieve the intended tolerance, %d iterations are required',n);
-            showMessage(handles,str,'g');
+            if(strcmp(metodo,'radioBi'))
+                %Calcular o número de iterações necessárias
+                a = str2num(get(handles.editA,'String'));
+                b = str2num(get(handles.editB,'String'));
+                n = ceil(log2((b-a)/tol));
+                set(handles.editEqKmax,'String',num2str(n));
+                str = sprintf('Tip: To achieve the intended tolerance, %d iterations are required',n);
+                showMessage(handles,str,'g');
+            end
             
         end
   elseif(strcmp(eventdata.Key, 'backspace'))
+      showMessage(handles,'','g');
       resetPlot(handles,true,true,true,true,true);
   end
 
@@ -967,22 +1016,13 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton20.
-function pushbutton20_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton20 (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-    set(handles.panelEq,'Visible','off');
-    cla(handles.axesEq);
-    set(handles.editF,'String','');
-    clearText(handles);
 
 % --- Executes on button press in btnEqReset.
 function btnEqReset_Callback(hObject, eventdata, handles)
 % hObject    handle to btnEqReset (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+    resetData(handles)
 
 
 % --- Executes during object creation, after setting all properties.
@@ -1014,3 +1054,25 @@ function editEqX1_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in btnEqBack.
+function btnEqBack_Callback(hObject, eventdata, handles)
+% hObject    handle to btnEqBack (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+    set(handles.panelEq,'Visible','off');
+    cla(handles.axesEq);
+    set(handles.editF,'String','');
+    clearText(handles);
+    resetData(handles)
+    setUserinteraction(handles, true);
+    set(handles.btnEqGerar ,'Enable', 'off');
+
+
+% --- Executes on button press in EDO.
+function EDO_Callback(hObject, eventdata, handles)
+% hObject    handle to EDO (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

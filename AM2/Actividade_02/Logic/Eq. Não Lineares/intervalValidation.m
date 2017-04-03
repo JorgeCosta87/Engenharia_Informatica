@@ -1,11 +1,12 @@
-%Descrição:
+%intervalValidation validação do intervalo [a,b]
 %
+%   Validação do intervalo [a,b]
+%INPUT
+%   handles - handles dos objectos da GUI
+%   a - intervalo inferior
+%   b - intervalo superior
 %
-%
-%Intput
-%
-%
-%Output
+%OUTPUT
 % 0 - OK
 % 1 - a não é um número real
 % 2 - b não é um número real
@@ -19,9 +20,9 @@ function value=intervalValidation(f, a, b)
         value = 1;
     elseif(~(isscalar(b) && isreal(b)))
         value = 2;
-    elseif(a > b)
+    elseif(a >= b)
        value = 3; 
-    elseif (f(a) * f(b) < 0)
+    elseif ((f(a) * f(b)) < 0)
         value = 0;
     else
         value = 4;

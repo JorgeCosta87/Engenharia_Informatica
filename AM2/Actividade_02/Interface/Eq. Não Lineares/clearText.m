@@ -1,3 +1,10 @@
+%changeM
+%   Função responsável por esconder/mostrar/limpar os dados da GUI
+%INPUT
+%   handles - handles dos objectos da GUI
+%
+%   26/03/2017 - Jorge Costa    .: jorgemdcosta@gmail.com 
+
 function  clearText( handles )
     
   %set(handles.editF,'String','');

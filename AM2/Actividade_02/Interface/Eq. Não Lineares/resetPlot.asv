@@ -41,24 +41,20 @@ persistent feq
             %Centar o gráfico no eixo dos x em torno do 0
             side = (abs(a)+abs(b))/4;
             
-            if(a > b)
-                limB = a;
-            elseif(a <= -4 || b >= 4)
+            if(a <= -4 || b >= 4)
                 limA = a-side;
                 limB = b+side;
             end
+            xlim = get(gca, 'Xlim')
             
-            %obter os limites do gráfico
-
-            
-            x= limA:0.1:limB;
+            x= xlim(1):0.1:xlim(2);
             plot(x,feq(x));
             
-            limitY = get(gca, 'Ylim')
-            yLimA = -((abs(limitY(1)) + abs(limitY(2))) / 2)
-            yLimB = -yLimA;
-            xlim([limA limB]);
-            ylim([yLimA yLimB]);
+            %obter os limites do gráfico
+            ylim_ = get(gca, 'Ylim');
+            
+            %xlim([limA limB]);
+            ylim([-50 50]);
             
             grid on;
             hold on; % para sobrepor gráficos num mesmo sistema de eixos   
@@ -71,21 +67,19 @@ persistent feq
     
         if(drawPa)
             hold on; % para sobrepor gráficos num mesmo sistema de eixos
-            limitY = get(gca, 'Ylim')
-            line([a a],[limitY(1) * 0.80 limitY(2) * 0.80],'Color','g','LineStyle','-','LineWidth',2);
+            line([a a],[-25 25],'Color','g','LineStyle','-','LineWidth',2);
             %plot(a,0,'ro');
         end
         if(drawPb)
             hold on; % para sobrepor gráficos num mesmo sistema de eixos
-            line([b b],[limitY(1) * 0.80 limitY(2) * 0.80],'Color','g','LineStyle','-','LineWidth',2);
+            line([b b],[-25 25],'Color','g','LineStyle','-','LineWidth',2);
             %%plot(b,0,'ro');
             
         end 
    
     if(strcmp(metodo,'radioTg') || strcmp(metodo,'radioSe'))
         if(drawX0)
-            
-            y = [limitY(1) * 0.80 limitY(2) * 0.80];
+            y = [-35 35];
             x0 = str2num(get(handles.editEqX0,'String'));
             plot(x0,0,'bo');
             line([x0 x0],y,'Color','red','LineStyle','--');
@@ -93,8 +87,7 @@ persistent feq
     end
     
     if(drawX1 &&  strcmp(metodo,'radioSe'))
-        limitY = get(gca, 'Ylim')
-        y = [limitY(1) * 0.80 limitY(2) * 0.80];
+        y = [-35 35];
         x1 = str2num(get(handles.editEqX1,'String'));
         plot(x1,0,'bo');
         line([x1 x1],y,'Color','red','LineStyle','--');

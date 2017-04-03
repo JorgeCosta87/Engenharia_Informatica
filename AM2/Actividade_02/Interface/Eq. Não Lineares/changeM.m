@@ -1,3 +1,12 @@
+%changeM
+%   Função responsável por esconder/mostrar os 
+%   dados relevantes para cada um dos métodos, quando este é alterado 
+%INPUT
+%   handles - handles dos objectos da GUI
+%
+%   26/03/2017 - Jorge Costa    .: jorgemdcosta@gmail.com 
+
+
 function  changeM( handles )
     
   resetPlot(handles,false,false,false,false,false);
@@ -17,6 +26,7 @@ function  changeM( handles )
         set(handles.textEqKmax,'Visible','off');
         set(handles.editEqTol,'Visible','off');
         set(handles.textEqTol,'Visible','off');
+        set(handles.btnEqGerar,'Enable','off');
         resetPlot(handles,true,false,false,false,false);
       elseif(isempty(get(handles.editEqX0,'String')))
         set(handles.textEqX0,'Visible','on');
@@ -25,7 +35,9 @@ function  changeM( handles )
         set(handles.textEqKmax,'Visible','off');
         set(handles.editEqTol,'Visible','off');
         set(handles.textEqTol,'Visible','off');
+        set(handles.btnEqGerar,'Enable','off');
         resetPlot(handles,true,true,true,false,false);
+        Show2Derivative(handles);
       else       
           if(strcmp(metodo,'radioSe'))
               if(isempty(get(handles.editEqX1,'String')))
@@ -37,7 +49,9 @@ function  changeM( handles )
                   set(handles.textEqKmax,'Visible','off');
                   set(handles.editEqTol,'Visible','off');
                   set(handles.textEqTol,'Visible','off');
+                  set(handles.btnEqGerar,'Enable','off');
                   resetPlot(handles,true,true,true,true,false);
+                  Show2Derivative(handles);
               else
                   set(handles.editA,'Visible','on');
                   set(handles.editB,'Visible','on');
@@ -49,6 +63,7 @@ function  changeM( handles )
                   set(handles.textEqKmax,'Visible','on');
                   set(handles.editEqTol,'Visible','on');
                   set(handles.textEqTol,'Visible','on');
+                  set(handles.btnEqGerar,'Enable','on');
                   resetPlot(handles,true,true,true,true,true);
               end
           else
@@ -62,6 +77,7 @@ function  changeM( handles )
               set(handles.textEqKmax,'Visible','on');
               set(handles.editEqTol,'Visible','on');
               set(handles.textEqTol,'Visible','on');
+              set(handles.btnEqGerar,'Enable','on');
               resetPlot(handles,true,true,true,true,false);
           end
       end
@@ -71,6 +87,7 @@ function  changeM( handles )
           set(handles.textEqKmax,'Visible','off');
           set(handles.editEqTol,'Visible','off');
           set(handles.textEqTol,'Visible','off');
+          set(handles.btnEqGerar,'Enable','off');
       else
           resetPlot(handles,true,true,true,false,false);
           set(handles.textEqX0,'Visible','off');
@@ -81,6 +98,7 @@ function  changeM( handles )
           set(handles.textEqKmax,'Visible','on');
           set(handles.editEqTol,'Visible','on');
           set(handles.textEqTol,'Visible','on');
+          set(handles.btnEqGerar,'Enable','on');
       end
   else
 %       set(handles.editEqKmax,'Visible','off');

@@ -1,11 +1,14 @@
-%Descrição:
+%AproxValidation validação da aproximação
 %
+%   Validação da aproximação x
+%INPUT
+%   handles - handles dos objectos da GUI
+%   f - função da equação não linear f(x)=0
+%   x - aproximação a validar
+%   a - intervalo inferior
+%   b - intervalo superior
 %
-%
-%Intput
-%
-%
-%Output
+%OUTPUT
 % 0 - OK
 % 1 - Não é um número real
 % 2 - Fora do intervalo [a, b]
