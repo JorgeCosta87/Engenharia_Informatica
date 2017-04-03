@@ -59,13 +59,13 @@ handles.output = hObject;
 guidata(hObject, handles);
 
 axes(handles.axesPg)
-imgPg = imread('Assets\pg.jpg');
+imgPg = imread('Assets/pg.jpg');
 image(imgPg)
 axis off
 axis image
 
 axes(handles.axesNumeric)
-imgNumeric = imread('Assets\numeric.jpg');
+imgNumeric = imread('Assets/numeric.jpg');
 image(imgNumeric)
 axis off
 axis image
@@ -96,7 +96,7 @@ function figure1_CreateFcn(hObject, eventdata, handles)
     %Define o tamanho da figure
     boxSize = [1248 745];
     
-    %Obtém a dimensão do ecrã
+    %Obtï¿½m a dimensï¿½o do ecrï¿½
     screensize = get(0,'ScreenSize');
     xPos = ceil(screensize(3) / 2) - (boxSize(1)/2);
     yPos = ceil(screensize(4) / 2) - (boxSize(2)/2);
@@ -395,7 +395,7 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-    %Obtém os dados necessários para a execução/validação dos métodos
+    %Obtï¿½m os dados necessï¿½rios para a execuï¿½ï¿½o/validaï¿½ï¿½o dos mï¿½todos
     f = FRvr(get(handles.editF,'String'));
     a = str2num(get(handles.editA,'String'));
     b = str2num(get(handles.editB,'String'));
@@ -405,7 +405,7 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
     tol = str2num(get(handles.editEqTol,'String'));
     metodo = get(get(handles.btnRadioGrp,'SelectedObject'),'Tag');
     
-    %Prepara o ambiente para a execuação dos métodos
+    %Prepara o ambiente para a execuaï¿½ï¿½o dos mï¿½todos
     valid = completeValidation(handles,f,a,b,x0,x1,kmax,tol,metodo);
     
     if(~valid)
@@ -415,8 +415,8 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
     setUserinteraction(handles, false);
     
     
-    %O modo de como vai ser apresentado o gráfico
-    %1- animação 2- step 3- none
+    %O modo de como vai ser apresentado o grï¿½fico
+    %1- animaï¿½ï¿½o 2- step 3- none
     mode =  get(get(handles.btnModeGrp,'SelectedObject'),'Tag');
     if(strcmp(mode,'radioEqStep'))
         set(handles.btnEqStep,'Enable','on');
@@ -428,7 +428,7 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
                
                [biRet, k] = MBissecao(handles,f,a,b,kmax,tol, mode);
                
-               %Apresenta as aproximações na tabela
+               %Apresenta as aproximaï¿½ï¿½es na tabela
                set(handles.tableEq,'Data',biRet);
                set(handles.textBiAprox,'String',biRet(end));
                set(handles.textBiIt,'String',k);
@@ -439,7 +439,7 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
                 
                [tgRet, k] = MTangentes(handles,f,df_dx,str2num(get(handles.editEqX0,'String')),kmax,tol,mode);
                 
-               %Apresenta as aproximações na tabela
+               %Apresenta as aproximaï¿½ï¿½es na tabela
                set(handles.tableEq,'Data', tgRet);
                set(handles.textTgAprox,'String', tgRet(end));
                set(handles.textTgIt,'String', k); 
@@ -447,7 +447,7 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
         case 'radioPf'
                 [pfRet, k] = MPontoFixo(handles,f,str2num(get(handles.editEqX0,'String')),kmax,tol,mode);
                
-                %Apresenta as aproximações na tabela
+                %Apresenta as aproximaï¿½ï¿½es na tabela
                set(handles.tableEq,'Data', pfRet);
                set(handles.textPfAprox,'String', pfRet(end));
                set(handles.textPfIt,'String', k); 
@@ -455,7 +455,7 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
         case 'radioFp'
                [FpRet, k] = MFalsaPos(handles,f,a,b,kmax,tol,mode);
 
-               %Apresenta as aproximações na tabela
+               %Apresenta as aproximaï¿½ï¿½es na tabela
                set(handles.tableEq,'Data', FpRet);
                set(handles.textFpAprox,'String', FpRet(end));
                set(handles.textFpIt,'String', k);
@@ -465,7 +465,7 @@ function btnEqGerar_Callback(hObject, eventdata, handles)
                [seRet, k] = MSecante(handles,f, str2num(get(handles.editEqX0,'String')),...
                                 str2num(get(handles.editEqX1,'String')),kmax,tol,mode);
            
-               %Apresenta as aproximações na tabela
+               %Apresenta as aproximaï¿½ï¿½es na tabela
                set(handles.tableEq,'Data',seRet(3:end));
                set(handles.textSeAprox,'String',seRet(end));
                set(handles.textSeIt,'String',k);
@@ -510,7 +510,7 @@ function editF_KeyPressFcn(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     if(strcmp(eventdata.Key, 'return'))
        
-        %Sem o pause, sá consegue captar a string no segundo ENTER
+        %Sem o pause, sï¿½ consegue captar a string no segundo ENTER
         pause(0.01)
         resetPlot(handles,false,false,false,false,false);
         clearText(handles);
@@ -759,7 +759,7 @@ function editEqX1_KeyPressFcn(hObject, eventdata, handles)
                 feq =FRvr(get(handles.editF,'String'));
                 metodo = get(get(handles.btnRadioGrp,'SelectedObject'),'Tag');
                 
-                %validação do x1
+                %validaï¿½ï¿½o do x1
                 val = AproxValidation(handles,feq,x1,a,b)
                 if(x1 < x0)
                     showMessage(handles,'x1 is less than x0','r');
@@ -858,7 +858,7 @@ function editEqTol_KeyPressFcn(hObject, eventdata, handles)
             set(handles.textEqFeedback,'String','');
             
             if(strcmp(metodo,'radioBi'))
-                %Calcular o número de iterações necessárias
+                %Calcular o nï¿½mero de iteraï¿½ï¿½es necessï¿½rias
                 a = str2num(get(handles.editA,'String'));
                 b = str2num(get(handles.editB,'String'));
                 n = ceil(log2((b-a)/tol));
