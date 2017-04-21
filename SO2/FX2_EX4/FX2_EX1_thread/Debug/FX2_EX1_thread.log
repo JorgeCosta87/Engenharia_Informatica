@@ -1,0 +1,8 @@
+﻿  thread.cpp
+c:\users\costa\documents\visual studio 2015\projects\fx2_ex1_thread\fx2_ex1_thread\thread.cpp(30): warning C4101: 'v': unreferenced local variable
+c:\users\costa\documents\visual studio 2015\projects\fx2_ex1_thread\fx2_ex1_thread\thread.cpp(28): warning C4101: 'resp': unreferenced local variable
+c:\users\costa\documents\visual studio 2015\projects\fx2_ex1_thread\fx2_ex1_thread\thread.cpp(29): warning C4101: 'y': unreferenced local variable
+c:\users\costa\documents\visual studio 2015\projects\fx2_ex1_thread\fx2_ex1_thread\thread.cpp(28): warning C4101: 'c': unreferenced local variable
+c:\users\costa\documents\visual studio 2015\projects\fx2_ex1_thread\fx2_ex1_thread\thread.cpp(120): warning C4700: uninitialized local variable 'fti' used
+  FX2_EX1_thread.vcxproj -> C:\Users\Costa\Documents\Visual Studio 2015\Projects\FX2_EX1_thread\Debug\FX2_EX1_thread.exe
+  FX2_EX1_thread.vcxproj -> C:\Users\Costa\Documents\Visual Studio 2015\Projects\FX2_EX1_thread\Debug\FX2_EX1_thread.pdb (Full PDB)

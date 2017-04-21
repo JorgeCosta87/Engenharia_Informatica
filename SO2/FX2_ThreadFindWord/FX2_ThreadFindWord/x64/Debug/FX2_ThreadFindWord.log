@@ -1,0 +1,8 @@
+﻿  Source.c
+c:\users\costa\documents\visual studio 2015\projects\fx2_threadfindword\fx2_threadfindword\source.c(34): warning C4477: 'wprintf' : format string '%s' requires an argument of type 'unsigned short *', but variadic argument 1 has type 'int'
+c:\users\costa\documents\visual studio 2015\projects\fx2_threadfindword\fx2_threadfindword\source.c(34): warning C4313: 'wprintf': '%s' in format string conflicts with argument 1 of type 'int'
+c:\users\costa\documents\visual studio 2015\projects\fx2_threadfindword\fx2_threadfindword\source.c(59): warning C4101: 'aux': unreferenced local variable
+c:\users\costa\documents\visual studio 2015\projects\fx2_threadfindword\fx2_threadfindword\source.c(59): warning C4101: 'linha': unreferenced local variable
+c:\users\costa\documents\visual studio 2015\projects\fx2_threadfindword\fx2_threadfindword\source.c(62): warning C4101: 'threadId': unreferenced local variable
+  FX2_ThreadFindWord.vcxproj -> C:\Users\Costa\Documents\Visual Studio 2015\Projects\FX2_ThreadFindWord\x64\Debug\FX2_ThreadFindWord.exe
+  FX2_ThreadFindWord.vcxproj -> C:\Users\Costa\Documents\Visual Studio 2015\Projects\FX2_ThreadFindWord\x64\Debug\FX2_ThreadFindWord.pdb (Full PDB)
