@@ -22,7 +22,7 @@ function varargout = AM2(varargin)
 
 % Edit the above text to modify the response to help AM2
 
-% Last Modified by GUIDE v2.5 02-Apr-2017 02:20:11
+% Last Modified by GUIDE v2.5 12-Jun-2017 03:29:28
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -58,6 +58,15 @@ handles.output = hObject;
 % Update handles structure
 guidata(hObject, handles);
 
+
+%comunication between guis
+                             
+hSolucao.filhas(1)= MaquinaDerivadaPrimitiva('Visible','off');  
+hSolucao.filhas(2)= DerivacaoNumerica('Visible','Off'); 
+hSolucao.filhas(3)= GUI_IntNumerica('Visible','Off');  
+
+
+
 axes(handles.axesPg)
 imgPg = imread('Assets/pg.jpg');
 image(imgPg)
@@ -71,10 +80,44 @@ axis off
 axis image
 
 
+%Docente
+
+axes(handles.axesDocente)
+imgDocente = imread('photos/armenio.jpg');
+image(imgDocente)
+axis off
+axis image
+
+%imagens dos autores
+
+axes(handles.axesJorge)
+imgJorge = imread('photos/jorge.jpg');
+image(imgJorge)
+axis off
+axis image
+
+%icon faceBook
+str = '<html><img width=31 height=35 src="file:Assets/Icons/face2.png" align="center"/> </html>';
+set(handles.btnFaceDocente, 'String',str);  
+str = '<html><img width=31 height=35 src="file:Assets/Icons/face2.png" align="center"/> </html>';
+set(handles.btnFaceJorge, 'String',str); 
+
+
+% Icon email
+str = '<html><img width=20 height=20 src="file:Assets/Icons/email.png" align="left"/>  &nbsp; Enviar email</html>';
+set(handles.btnEmailDocente, 'String',str);  
+str = '<html><img width=20 height=20 src="file:Assets/Icons/email.png" align="left"/>  &nbsp; Enviar email</html>';
+set(handles.btnEmailJorge, 'String',str);  
+
+
+%icon do botï¿½o de enviar email
+str = '<html><img width=20 height=20 src="file:Assets/Icons/send1.png" align="left"/>  &nbsp; Enviar</html>';
+set(handles.bntSend, 'String',str);  
+
 
 
 % UIWAIT makes AM2 wait for user response (see UIRESUME)
-% uiwait(handles.figure1);
+% uiwait(handles.mainFig);
 
 
 % --- Outputs from this function are returned to the command line.
@@ -89,8 +132,8 @@ varargout{1} = handles.output;
 
 
 % --- Executes during object creation, after setting all properties.
-function figure1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to figure1 (see GCBO)
+function mainFig_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to mainFig (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
     %Define o tamanho da figure
@@ -113,19 +156,6 @@ function btnPg_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
     set(handles.mainPg,'Visible','on');
     set(handles.textPg,'Visible','on');
-
-
-% --- Executes on button press in btnPolTaylor.
-function btnPolTaylor_Callback(hObject, eventdata, handles)
-% hObject    handle to btnPolTaylor (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
-
-% --- Executes on button press in btnAbout.
-function btnAbout_Callback(hObject, eventdata, handles)
-% hObject    handle to btnAbout (see GCBO)
-% eventdata  reserved - to be defined in a future version of MATLAB
-% handles    structure with handles and user data (see GUIDATA)
 
 % --- Executes on button press in btnEq.
 function btnEq_Callback(hObject, eventdata, handles)
@@ -1071,8 +1101,209 @@ function btnEqBack_Callback(hObject, eventdata, handles)
     set(handles.btnEqGerar ,'Enable', 'off');
 
 
-% --- Executes on button press in EDO.
-function EDO_Callback(hObject, eventdata, handles)
-% hObject    handle to EDO (see GCBO)
+
+% --- Executes on button press in btnPolTaylor.
+function btnPolTaylor_Callback(hObject, eventdata, handles)
+% hObject    handle to btnPolTaylor (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% --- Executes on button press in btnMaquina.
+try
+    winopen('Assets/PolinomioTaylor_TP_AM2.ggb');
+catch
+    myicon = imread('Icons\geogebra.png');
+    h = msgbox({'Não tem o Geogebra instalado!'}...
+                ,'Invalid Path','custom',myicon);
+    uiwait(h) 
+    try
+        url = 'https://www.geogebra.org/download?lang=pt_PT';
+        web(url,'-browser')
+    catch
+        errordlg('Sem conexão à internet','File Error');
+    end
+end
+
+function btnMaquina_Callback(hObject, eventdata, handles)
+% hObject    handle to btnMaquina (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+hSolucao.filhas(1)= MaquinaDerivadaPrimitiva('Visible','on');  
+
+% --- Executes on button press in btnAbout.
+
+
+% --- Executes on button press in btnDev.
+function btnDev_Callback(hObject, eventdata, handles)
+% hObject    handle to btnDev (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+hSolucao.filhas(2)= DerivacaoNumerica('Visible','on');  
+
+% --- Executes on button press in btnInt.
+function btnInt_Callback(hObject, eventdata, handles)
+% hObject    handle to btnInt (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+hSolucao.filhas(3)= GUI_IntNumerica('Visible','on'); 
+
+% --------------------------------------------------------------------
+function btnAbout_Callback(hObject, eventdata, handles)
+% hObject    handle to btnAbout (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.panelAbout, 'visible', 'On');
+
+% --- Executes on button press in btnFechar.
+function btnFechar_Callback(hObject, eventdata, handles)
+% hObject    handle to btnFechar (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.panelMessage,'visible', 'Off');
+set(handles.panelAbout, 'visible', 'on');
+
+
+% --- Executes on button press in btnCloseAbout.
+function btnCloseAbout_Callback(hObject, eventdata, handles)
+% hObject    handle to btnCloseAbout (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.panelAbout, 'visible', 'off');
+
+% --- Executes on button press in bntSend.
+function bntSend_Callback(hObject, eventdata, handles)
+% hObject    handle to bntSend (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+mail = 'matlab@danieloliveira.me';
+password = 'matlab';
+
+setpref('Internet','E_mail', mail);
+setpref('Internet','SMTP_Server','chipmania.pt');
+setpref('Internet','SMTP_Username',mail);
+setpref('Internet','SMTP_Password',password);
+
+props = java.lang.System.getProperties;
+props.setProperty('mail.smtp.auth','true');
+props.remove('mail.smtp.socketFactory.class'); 
+%props.setProperty('mail.smtp.socketFactory.class', 'javax.net.ssl.SSLSocketFactory');
+props.setProperty('mail.smtp.socketFactory.port','25');
+%props.setProperty('mail.smtp.starttls.enable', 'true');
+
+
+sendmail(get(handles.emailSend, 'String'),'Actividade 3 - AM2',get(handles.editMessage, 'String'));
+set(handles.panelMessage,'visible', 'Off');
+set(handles.panelAbout, 'visible', 'On');
+set(handles.textFeedback,'String', 'Email enviado com sucesso');
+
+% --- Executes on button press in btnEmailJorge.
+function btnEmailJorge_Callback(hObject, eventdata, handles)
+% hObject    handle to btnEmailJorge (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.panelMessage,'visible', 'on');
+set(handles.panelAbout, 'visible', 'Off');
+set(handles.emailSend, 'String', 'jorgemdcosta@gmail.com');
+
+% --- Executes on button press in btnEmailDocente.
+function btnEmailDocente_Callback(hObject, eventdata, handles)
+% hObject    handle to btnEmailDocente (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+set(handles.panelMessage,'visible', 'on');
+set(handles.panelAbout, 'visible', 'Off');
+set(handles.emailSend, 'String', 'armenioc@isec.pt');
+
+% --- Executes on button press in btnFaceDocente.
+function btnFaceDocente_Callback(hObject, eventdata, handles)
+% hObject    handle to btnFaceDocente (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+url = 'https://www.facebook.com/armeniocorreia';
+web(url,'-browser')
+
+% --- Executes on button press in btnFaceJorge.
+function btnFaceJorge_Callback(hObject, eventdata, handles)
+% hObject    handle to btnFaceJorge (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+url = 'https://www.facebook.com/jorge.costa.7921';
+web(url,'-browser')
+
+
+
+function editMessage_Callback(hObject, eventdata, handles)
+% hObject    handle to editMessage (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of editMessage as text
+%        str2double(get(hObject,'String')) returns contents of editMessage as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function editMessage_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to editMessage (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+% --- Executes on button press in pushbutton28.
+function pushbutton28_Callback(hObject, eventdata, handles)
+% hObject    handle to pushbutton28 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function btnSair_Callback(hObject, eventdata, handles)
+% hObject    handle to btnSair (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+close all;
+
+% --------------------------------------------------------------------
+function btnGeogebra_Callback(hObject, eventdata, handles)
+% hObject    handle to btnGeogebra (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+try
+    winopen('C:\Program Files (x86)\GeoGebra 5.0\GeoGebra.exe');
+catch
+    myicon = imread('Icons\geogebra.png');
+    h = msgbox({'Geogebra.exe não encontrado' ' ' 'Selecione a directoria do geogebra' ' Exemplo: C:\Program Files (x86)\GeoGebra 5.0'},'Invalid Path','custom',myicon);
+    uiwait(h) 
+    folder = uigetdir('C:\');
+    pahtGeogebra = strcat(folder,'\GeoGebra.exe');
+    
+    try
+        winopen(pahtGeogebra);
+    catch
+        errordlg('Path inválido','File Error');
+    end
+end
+% --------------------------------------------------------------------
+function btnWolfram_Callback(hObject, eventdata, handles)
+% hObject    handle to btnWolfram (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+url = 'https://www.wolframalpha.com/';
+web(url,'-browser')
+
+
+% --------------------------------------------------------------------
+function Untitled_1_Callback(hObject, eventdata, handles)
+% hObject    handle to Untitled_1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --------------------------------------------------------------------
+function until_Callback(hObject, eventdata, handles)
+% hObject    handle to until (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
